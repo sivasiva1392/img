@@ -1,0 +1,81 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Image Filters</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="app">
+    <header class="app__header">
+      <h1 class="app__title">Image Filters</h1>
+      <p class="app__subtitle">Upload an image, apply a filter, and download the result.</p>
+    </header>
+
+    <section class="panel" aria-label="Controls">
+      <div class="controls">
+        <div class="control">
+          <label class="label" for="fileInput">Upload image</label>
+          <input id="fileInput" class="file" type="file" accept="image/png,image/jpeg,image/jpg" />
+        </div>
+
+        <div class="control">
+          <label class="label" for="filterSelect">Filter</label>
+          <select id="filterSelect" class="select" disabled>
+            <option value="none">None</option>
+            <option value="grayscale">Grayscale</option>
+            <option value="sepia">Sepia</option>
+            <option value="invert">Invert</option>
+            <option value="blur">Blur</option>
+            <option value="brightness">Brightness</option>
+            <option value="contrast">Contrast</option>
+          </select>
+        </div>
+
+        <div class="control control--range" id="blurControl" hidden>
+          <div class="range__row">
+            <label class="label" for="blurRange">Blur</label>
+            <output id="blurValue" class="value" for="blurRange">0</output>
+          </div>
+          <input id="blurRange" class="range" type="range" min="0" max="8" value="0" step="1" disabled />
+        </div>
+
+        <div class="control control--range" id="brightnessControl" hidden>
+          <div class="range__row">
+            <label class="label" for="brightnessRange">Brightness</label>
+            <output id="brightnessValue" class="value" for="brightnessRange">0</output>
+          </div>
+          <input id="brightnessRange" class="range" type="range" min="-100" max="100" value="0" step="1" disabled />
+        </div>
+
+        <div class="control control--range" id="contrastControl" hidden>
+          <div class="range__row">
+            <label class="label" for="contrastRange">Contrast</label>
+            <output id="contrastValue" class="value" for="contrastRange">0</output>
+          </div>
+          <input id="contrastRange" class="range" type="range" min="-100" max="100" value="0" step="1" disabled />
+        </div>
+
+        <div class="actions">
+          <button id="resetBtn" class="btn btn--ghost" type="button" disabled>Reset</button>
+          <button id="downloadBtn" class="btn" type="button" disabled>Download</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Preview">
+      <div class="preview">
+        <canvas id="canvas" class="canvas" width="800" height="500"></canvas>
+        <div id="hint" class="hint">Upload a PNG or JPG to start.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
