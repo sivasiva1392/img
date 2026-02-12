@@ -53,6 +53,49 @@
                 </select>
               </div>
 
+              <div class="control col-12">
+                <label class="label form-label" for="shapeSelect">Shape</label>
+                <select id="shapeSelect" class="form-select" disabled>
+                  <option value="none">None</option>
+                  <option value="circle">Circle</option>
+                  <option value="rounded">Rounded</option>
+                  <option value="star">Star</option>
+                  <option value="heart">Heart</option>
+                  <option value="hexagon">Hexagon</option>
+                  <option value="diamond">Diamond</option>
+                  <option value="triangle">Triangle</option>
+                  <option value="pentagon">Pentagon</option>
+                  <option value="cross">Cross</option>
+                  <option value="ellipse">Ellipse</option>
+                </select>
+              </div>
+
+              <div class="control col-12">
+                <label class="label form-label">Transform</label>
+                <div class="d-flex gap-2 flex-wrap">
+                  <button id="flipHorizontalBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled>Flip Horizontal</button>
+                  <button id="flipVerticalBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled>Flip Vertical</button>
+                  <button id="rotateLeftBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled>Rotate Left</button>
+                  <button id="rotateRightBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled>Rotate Right</button>
+                </div>
+              </div>
+
+              <div class="control col-12">
+                <label class="label form-label" for="formatSelect">Output Format</label>
+                <select id="formatSelect" class="form-select" disabled>
+                  <option value="png">PNG (Transparent)</option>
+                  <option value="jpeg">JPEG (Compressed)</option>
+                  <option value="webp">WebP (Modern)</option>
+                  <option value="bmp">BMP (Uncompressed)</option>
+                </select>
+              </div>
+
+              <div class="control col-12" id="qualityControl">
+                <label class="label form-label" for="qualityInput">Quality (%)</label>
+                <input id="qualityInput" class="form-control" type="number" min="10" max="100" value="90" step="5" disabled />
+                <small class="text-muted">Enter quality percentage (10-100%)</small>
+              </div>
+
               <div class="control control--range" id="blurControl" hidden>
                 <div class="range__row">
                   <label class="label form-label" for="blurRange">Blur</label>
