@@ -150,7 +150,119 @@
     return imageData;
   }
 
-  function boxBlur(imageData, radius) {
+  function applyVintage(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+
+      d[i] = clampByte(0.5 * r + 0.4 * g + 0.1 * b + 20);
+      d[i + 1] = clampByte(0.3 * r + 0.5 * g + 0.2 * b + 10);
+      d[i + 2] = clampByte(0.2 * r + 0.3 * g + 0.5 * b);
+    }
+    return imageData;
+  }
+
+  function applyCold(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      d[i] = clampByte(d[i] * 0.9);
+      d[i + 1] = clampByte(d[i + 1] * 1.0);
+      d[i + 2] = clampByte(d[i + 2] * 1.3);
+    }
+    return imageData;
+  }
+
+  function applyWarm(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      d[i] = clampByte(d[i] * 1.3);
+      d[i + 1] = clampByte(d[i + 1] * 1.1);
+      d[i + 2] = clampByte(d[i + 2] * 0.8);
+    }
+    return imageData;
+  }
+
+  function applyDramatic(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      d[i] = clampByte((d[i] - 128) * 1.5 + 128);
+      d[i + 1] = clampByte((d[i + 1] - 128) * 1.2 + 128);
+      d[i + 2] = clampByte((d[i + 2] - 128) * 0.8 + 128);
+    }
+    return imageData;
+  }
+
+  function applyBlackWhite(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      const gray = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      const bw = gray > 128 ? 255 : 0;
+      d[i] = d[i + 1] = d[i + 2] = bw;
+    }
+    return imageData;
+  }
+
+  function applySunset(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+
+      d[i] = clampByte(r * 1.2 + 30);
+      d[i + 1] = clampByte(g * 0.8 + 20);
+      d[i + 2] = clampByte(b * 0.5 - 20);
+    }
+    return imageData;
+  }
+
+  function applyOcean(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+
+      d[i] = clampByte(r * 0.7);
+      d[i + 1] = clampByte(g * 0.9 + 10);
+      d[i + 2] = clampByte(b * 1.4 + 20);
+    }
+    return imageData;
+  }
+
+  function applyForest(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+
+      d[i] = clampByte(r * 0.8);
+      d[i + 1] = clampByte(g * 1.3 + 15);
+      d[i + 2] = clampByte(b * 0.6);
+    }
+    return imageData;
+  }
+
+  function applyPolaroid(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+
+      d[i] = clampByte(1.438 * r - 0.122 * g - 0.016 * b + 10);
+      d[i + 1] = clampByte(-0.062 * r + 1.378 * g - 0.016 * b + 5);
+      d[i + 2] = clampByte(-0.062 * r - 0.122 * g + 1.383 * b - 5);
+    }
+    return imageData;
+  }
+    function boxBlur(imageData, radius) {
     const r = Math.max(0, Math.min(20, Number(radius) || 0));
     if (r === 0) return imageData;
 
@@ -213,6 +325,24 @@
       img = applyContrast(img, contrastRange.value);
     } else if (filter === 'blur') {
       img = boxBlur(img, blurRange.value);
+    } else if (filter === 'vintage') {
+      img = applyVintage(img);
+    } else if (filter === 'cold') {
+      img = applyCold(img);
+    } else if (filter === 'warm') {
+      img = applyWarm(img);
+    } else if (filter === 'dramatic') {
+      img = applyDramatic(img);
+    } else if (filter === 'blackwhite') {
+      img = applyBlackWhite(img);
+    } else if (filter === 'sunset') {
+      img = applySunset(img);
+    } else if (filter === 'ocean') {
+      img = applyOcean(img);
+    } else if (filter === 'forest') {
+      img = applyForest(img);
+    } else if (filter === 'polaroid') {
+      img = applyPolaroid(img);
     }
 
     ctx.putImageData(img, 0, 0);
