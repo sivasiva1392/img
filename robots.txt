@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: http://localhost/img/sitemap.xml
+Sitemap: https://pixifynow.com/sitemap.xml
 
 # Allow search engines to crawl all image and content files
 Allow: *.png
