@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: http://localhost/img/sitemap.xml
+
+# Allow search engines to crawl all image and content files
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.css
+Allow: *.js
+
+# Block unnecessary files
+Disallow: /private/
+Disallow: /temp/
+Disallow: /*.log$

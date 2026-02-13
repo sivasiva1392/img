@@ -5,20 +5,129 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Image Filters</title>
+  
+  <!-- SEO Meta Tags -->
+  <title>Free Online Image Filters & Photo Editor - Apply Professional Effects</title>
+  <meta name="description" content="Free online image editor with 20+ professional filters. Apply vintage, black & white, blur, brightness effects. Transform images, add shapes, rotate, flip. No download required." />
+  <meta name="keywords" content="image filters, photo editor, online photo editor, free image editor, image effects, photo filters, vintage filter, black and white, blur image, brightness adjust, contrast, image tools, photo editing online, image transform" />
+  <meta name="author" content="Image Filters App" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Free Online Image Filters & Photo Editor" />
+  <meta property="og:description" content="Apply professional filters to your images online. Transform photos, add effects, and edit images for free." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://localhost/img/" />
+  <meta property="og:site_name" content="Image Filters" />
+  <meta property="og:image" content="http://localhost/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online Image Filters & Photo Editor" />
+  <meta name="twitter:description" content="Apply professional filters to your images online. Transform photos, add effects, and edit images for free." />
+  <meta name="twitter:image" content="http://localhost/img/twitter-image.jpg" />
+  <meta name="twitter:creator" content="@imagefilters" />
+  
+  <!-- Technical SEO -->
+  <link rel="canonical" href="http://localhost/img/" />
+  <link rel="alternate" hreflang="en" href="http://localhost/img/" />
+  <link rel="alternate" hreflang="x-default" href="http://localhost/img/" />
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="style.css" />
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Filters - Free Online Photo Editor",
+    "description": "Free online image editor with professional filters, image transformation, and photo editing tools",
+    "url": "http://localhost/img/",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Image Filters",
+      "Image Transformation",
+      "Image Rotation",
+      "Image Flipping",
+      "Shape Masks",
+      "Brightness Adjustment",
+      "Contrast Adjustment",
+      "Blur Effects",
+      "Vintage Filters"
+    ],
+    "screenshot": "http://localhost/img/screenshot.jpg",
+    "softwareVersion": "1.0",
+    "author": {
+      "@type": "Organization",
+      "name": "Image Filters App"
+    }
+  }
+  </script>
 </head>
 
 <body>
   <main class="app container py-4">
     <header class="app__header text-center mb-3">
-      <h1 class="app__title mb-1">Image Filters</h1>
-      <p class="app__subtitle mb-0">Upload an image, apply a filter, and download the result.</p>
-      <p>&nbsp;</p>
-              <button id="resetBtn" class="btn btn-outline-secondary" type="button" disabled>Reset</button>
-              <button id="downloadBtn" class="btn btn-primary" type="button" disabled>Download</button>
+      <h1 class="app__title mb-1">Free Online Image Filters & Photo Editor</h1>
+      <p class="app__subtitle mb-0">Upload an image, apply professional filters, transform your photos, and download your edited images instantly. No registration required.</p>
+      <div class="app__description mt-3">
+        <p class="text-muted">🎨 <strong>20+ Professional Filters:</strong> Vintage, Black & White, Blur, Brightness, Contrast & More</p>
+        <p class="text-muted">🚀 <strong>Instant Editing:</strong> Real-time preview with no software download needed</p>
+        <p class="text-muted">💎 <strong>Free Forever:</strong> No watermarks, no registration, completely free</p>
+      </div>
     </header>
+
+    <section class="features-section mb-4">
+      <div class="row text-center">
+        <div class="col-md-3 col-6 mb-3">
+          <div class="feature-card">
+            <h3>🎨 Image Filters</h3>
+            <p>Apply vintage, black & white, sepia, and artistic effects</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-3">
+          <div class="feature-card">
+            <h3>🔄 Transform Tools</h3>
+            <p>Rotate, flip, and adjust your images with precision</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-3">
+          <div class="feature-card">
+            <h3>� Shape Masks</h3>
+            <p>Crop into circles, hearts, stars, and more shapes</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-3">
+          <div class="feature-card">
+            <h3>� Format Options</h3>
+            <p>Save as PNG, JPEG, WebP, or BMP formats</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
       
 
@@ -31,73 +140,77 @@
           <div class="card-body">
             <div class="controls row g-3 align-items-end">
               <div class="control col-12">
-                <label class="label form-label" for="fileInput">Upload image</label>
-                <input id="fileInput" class="form-control" type="file" accept="image/png,image/jpeg,image/jpg" />
+                <label class="label form-label" for="fileInput">📁 Upload Image (PNG, JPG, JPEG)</label>
+                <input id="fileInput" class="form-control" type="file" accept="image/png,image/jpeg,image/jpg" aria-describedby="fileHelp" />
+                <small id="fileHelp" class="form-text text-muted">Maximum file size: 10MB. Supported formats: PNG, JPG, JPEG</small>
               </div>
 
               <div class="control col-12">
-                <label class="label form-label" for="filterSelect">Filter</label>
-                <select id="filterSelect" class="form-select" disabled>
-                  <option value="none">None</option>
-                  <option value="grayscale">Grayscale</option>
-                  <option value="sepia">Sepia</option>
-                  <option value="invert">Invert</option>
-                  <option value="blur">Blur</option>
-                  <option value="brightness">Brightness</option>
-                  <option value="contrast">Contrast</option>
-                  <option value="vintage">Vintage</option>
-                  <option value="cold">Cold</option>
-                  <option value="warm">Warm</option>
-                  <option value="dramatic">Dramatic</option>
-                  <option value="blackwhite">Black & White</option>
-                  <option value="sunset">Sunset</option>
-                  <option value="ocean">Ocean</option>
-                  <option value="forest">Forest</option>
-                  <option value="polaroid">Polaroid</option>
+                <label class="label form-label" for="filterSelect">🎨 Choose Filter Effect</label>
+                <select id="filterSelect" class="form-select" disabled aria-describedby="filterHelp">
+                  <option value="none">No Filter</option>
+                  <option value="grayscale">⚫ Grayscale</option>
+                  <option value="sepia">🟤 Sepia</option>
+                  <option value="invert">🔄 Invert Colors</option>
+                  <option value="blur">💫 Blur</option>
+                  <option value="brightness">☀️ Brightness</option>
+                  <option value="contrast">◐ Contrast</option>
+                  <option value="vintage">📷 Vintage</option>
+                  <option value="cold">❄️ Cold</option>
+                  <option value="warm">🔥 Warm</option>
+                  <option value="dramatic">🎭 Dramatic</option>
+                  <option value="blackwhite">⚫ Black & White</option>
+                  <option value="sunset">🌅 Sunset</option>
+                  <option value="ocean">🌊 Ocean</option>
+                  <option value="forest">🌲 Forest</option>
+                  <option value="polaroid">📸 Polaroid</option>
                 </select>
+                <small id="filterHelp" class="form-text text-muted">Apply professional photo effects to your image</small>
               </div>
 
               <div class="control col-12">
-                <label class="label form-label" for="shapeSelect">Shape</label>
-                <select id="shapeSelect" class="form-select" disabled>
-                  <option value="none">None</option>
-                  <option value="circle">Circle</option>
-                  <option value="rounded">Rounded</option>
-                  <option value="star">Star</option>
-                  <option value="heart">Heart</option>
-                  <option value="hexagon">Hexagon</option>
-                  <option value="diamond">Diamond</option>
-                  <option value="triangle">Triangle</option>
-                  <option value="pentagon">Pentagon</option>
-                  <option value="cross">Cross</option>
-                  <option value="ellipse">Ellipse</option>
+                <label class="label form-label" for="shapeSelect">✂️ Shape Mask</label>
+                <select id="shapeSelect" class="form-select" disabled aria-describedby="shapeHelp">
+                  <option value="none">No Shape</option>
+                  <option value="circle">⭕ Circle</option>
+                  <option value="rounded">⬜ Rounded</option>
+                  <option value="star">⭐ Star</option>
+                  <option value="heart">❤️ Heart</option>
+                  <option value="hexagon">⬡ Hexagon</option>
+                  <option value="diamond">💎 Diamond</option>
+                  <option value="triangle">🔺 Triangle</option>
+                  <option value="pentagon">⬠ Pentagon</option>
+                  <option value="cross">✚ Cross</option>
+                  <option value="ellipse">⬭ Ellipse</option>
                 </select>
+                <small id="shapeHelp" class="form-text text-muted">Crop your image into different shapes</small>
               </div>
 
               <div class="control col-12">
-                <label class="label form-label">Transform</label>
+                <label class="label form-label">🔄 Transform Tools</label>
                 <div class="d-flex gap-2 flex-wrap">
-                  <button id="flipHorizontalBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled>Flip Horizontal</button>
-                  <button id="flipVerticalBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled>Flip Vertical</button>
-                  <button id="rotateLeftBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled>Rotate Left</button>
-                  <button id="rotateRightBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled>Rotate Right</button>
+                  <button id="flipHorizontalBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled aria-label="Flip image horizontally">↔️ Flip Horizontal</button>
+                  <button id="flipVerticalBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled aria-label="Flip image vertically">↕️ Flip Vertical</button>
+                  <button id="rotateLeftBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled aria-label="Rotate image left 90 degrees">↺ Rotate Left</button>
+                  <button id="rotateRightBtn" class="btn btn-outline-secondary btn-sm" type="button" disabled aria-label="Rotate image right 90 degrees">↻ Rotate Right</button>
                 </div>
               </div>
 
               <div class="control col-12">
-                <label class="label form-label" for="formatSelect">Output Format</label>
-                <select id="formatSelect" class="form-select" disabled>
-                  <option value="png">PNG (Transparent)</option>
-                  <option value="jpeg">JPEG (Compressed)</option>
-                  <option value="webp">WebP (Modern)</option>
-                  <option value="bmp">BMP (Uncompressed)</option>
+                <label class="label form-label" for="formatSelect">💾 Output Format & Quality</label>
+                <select id="formatSelect" class="form-select" disabled aria-describedby="formatHelp">
+                  <option value="png">🖼️ PNG (Best Quality, Transparent Background)</option>
+                  <option value="jpeg">📄 JPEG (Smaller File Size, No Transparency)</option>
+                  <option value="webp">🌐 WebP (Modern Format, Best Compression)</option>
+                  <option value="bmp">🎨 BMP (Uncompressed, Maximum Quality)</option>
                 </select>
+                <small id="formatHelp" class="form-text text-muted">Choose format based on your needs: PNG for quality/transparency, JPEG for smaller files, WebP for modern web</small>
               </div>
 
               <div class="control col-12" id="qualityControl" style="display: none;">
-                <label class="label form-label" for="qualityInput">Quality (%)</label>
+                <label class="label form-label" for="qualityInput">🎚️ Image Quality</label>
                 <input id="qualityInput" class="form-control" type="number" min="10" max="100" value="90" step="5" disabled />
-                <small class="text-muted">Enter quality percentage (10-100%)</small>
+                <small class="text-muted">Quality: 90% (Recommended). Higher = Better quality but larger file size</small>
               </div>
 
               <div class="control control--range" id="blurControl" hidden>
@@ -131,14 +244,35 @@
 
       <!-- Output Area -->
       <div class="output-area col-md-6">
-        <section class="panel card shadow-sm" aria-label="Preview">
+        <section class="panel card shadow-sm" aria-label="Image Preview">
          
           <div class="card-body">
             <div class="preview">
-              <canvas id="canvas" class="canvas" width="800" height="auto"></canvas>
-              <div id="hint" class="hint">Upload a PNG or JPG to start.</div>
+              <canvas id="canvas" class="canvas" width="800" height="auto" alt="Image preview with applied filters and effects" role="img" aria-label="Edited image preview"></canvas>
+              <div id="hint" class="hint">📸 Upload a PNG or JPG image to start editing your photos with professional filters and effects.</div>
             </div>
             
+            <div class="image-actions mt-3 text-center" id="imageActions">
+              <button id="resetBtn" class="btn btn-outline-secondary me-2" type="button" disabled>🔄 Reset Image</button>
+              <button id="downloadBtn" class="btn btn-primary" type="button" disabled>💾 Download Edited Image</button>
+            </div>
+            
+            <div class="image-info mt-3" id="imageInfo" style="display: none;">
+              <div class="row text-center">
+                <div class="col-4">
+                  <small class="text-muted">Dimensions</small>
+                  <div class="fw-bold" id="imageDimensions">-</div>
+                </div>
+                <div class="col-4">
+                  <small class="text-muted">File Size</small>
+                  <div class="fw-bold" id="fileSize">-</div>
+                </div>
+                <div class="col-4">
+                  <small class="text-muted">Format</small>
+                  <div class="fw-bold" id="fileFormat">-</div>
+                </div>
+              </div>
+            </div>
 
           </div>
         </section>
@@ -148,6 +282,44 @@
 
     </div>
   </main>
+
+  <footer class="app__footer mt-5 py-4 border-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>🎨 Image Filters & Effects</h5>
+          <p class="text-muted">Professional photo editing tools completely free. No registration, no watermarks, instant results.</p>
+          <ul class="list-unstyled">
+            <li><a href="#filters" class="text-decoration-none">🎨 All Filters</a></li>
+            <li><a href="#shapes" class="text-decoration-none">✂️ Shape Masks</a></li>
+            <li><a href="#transform" class="text-decoration-none">🔄 Transform Tools</a></li>
+            <li><a href="#formats" class="text-decoration-none">💾 Format Options</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>📚 Popular Features</h5>
+          <ul class="list-unstyled">
+            <li><a href="#vintage" class="text-decoration-none">📷 Vintage Filter</a></li>
+            <li><a href="#blackwhite" class="text-decoration-none">⚫ Black & White</a></li>
+            <li><a href="#blur" class="text-decoration-none">💫 Blur Effect</a></li>
+            <li><a href="#brightness" class="text-decoration-none">☀️ Brightness Control</a></li>
+            <li><a href="#contrast" class="text-decoration-none">◐ Contrast Adjustment</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>🌟 About This Tool</h5>
+          <p class="text-muted">Free online image editor supporting PNG, JPG, JPEG formats with multiple output options. Perfect for social media, web content, and professional photo editing.</p>
+          <div class="mt-2">
+            <small class="text-muted">🚀 Fast Processing | 💎 No Watermarks | 📱 Mobile Friendly | 💾 Multiple Formats</small>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4 pt-3 border-top">
+        <p class="text-muted mb-0">© 2024 Image Filters - Free Online Photo Editor. All rights reserved.</p>
+        <p class="text-muted small">Edit photos online with professional filters • No download required • Instant results</p>
+      </div>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
