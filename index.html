@@ -15,14 +15,18 @@
     <header class="app__header text-center mb-3">
       <h1 class="app__title mb-1">Image Filters</h1>
       <p class="app__subtitle mb-0">Upload an image, apply a filter, and download the result.</p>
+      <p>&nbsp;</p>
+              <button id="resetBtn" class="btn btn-outline-secondary" type="button" disabled>Reset</button>
+              <button id="downloadBtn" class="btn btn-primary" type="button" disabled>Download</button>
     </header>
 
+      
+
     <div class="split-container">
-      <!-- Left Space Column -->
-      <div class="col-md-2"></div>
+
 
       <!-- Working Area -->
-      <div class="working-area col-md-4">
+      <div class="working-area col-md-6">
         <section class="panel card shadow-sm" aria-label="Controls">
           <div class="card-body">
             <div class="controls row g-3 align-items-end">
@@ -90,7 +94,7 @@
                 </select>
               </div>
 
-              <div class="control col-12" id="qualityControl">
+              <div class="control col-12" id="qualityControl" style="display: none;">
                 <label class="label form-label" for="qualityInput">Quality (%)</label>
                 <input id="qualityInput" class="form-control" type="number" min="10" max="100" value="90" step="5" disabled />
                 <small class="text-muted">Enter quality percentage (10-100%)</small>
@@ -119,11 +123,6 @@
                 </div>
                 <input id="contrastRange" class="form-range" type="range" min="-100" max="100" value="0" step="1" disabled />
               </div>
-
-              <div class="actions col-12 d-flex gap-2">
-                <button id="resetBtn" class="btn btn-outline-secondary" type="button" disabled>Reset</button>
-                <button id="downloadBtn" class="btn btn-primary" type="button" disabled>Download</button>
-              </div>
             </div>
           </div>
         </section>
@@ -131,13 +130,16 @@
 
 
       <!-- Output Area -->
-      <div class="output-area col-md-4">
+      <div class="output-area col-md-6">
         <section class="panel card shadow-sm" aria-label="Preview">
+         
           <div class="card-body">
             <div class="preview">
-              <canvas id="canvas" class="canvas" width="800" height="450"></canvas>
+              <canvas id="canvas" class="canvas" width="800" height="auto"></canvas>
               <div id="hint" class="hint">Upload a PNG or JPG to start.</div>
             </div>
+            
+
           </div>
         </section>
       </div>

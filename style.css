@@ -34,6 +34,9 @@ body {
   padding: 28px 16px 40px;
   display: grid;
   gap: 14px;
+  transform: scale(0.7); /* Reduce zoom level by 30% */
+  transform-origin: top center;
+  width: 100%;
 }
 
 .split-container {
@@ -170,28 +173,46 @@ body {
 
 .preview {
   position: relative;
-  padding: 16px;
-  min-height: 0px;
+  padding: 20px; /* Increased padding */
+  min-height: 400px; /* Increased minimum height */
   display: grid;
   place-items: center;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); /* Added gradient background */
+  border: 3px solid #cbd5e1; /* Thicker border */
+  border-radius: calc(var(--radius) * 1.2); /* Larger border radius */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05); /* Enhanced shadow */
 }
 
 .canvas {
   width: min(100%, 980px);
   height: auto;
-  border-radius: var(--radius);
-  border: 1px solid rgba(17, 24, 39, 0.12);
-  background: #f8fafc;
+  border-radius: calc(var(--radius) * 0.8); /* Slightly smaller radius */
+  border: 2px solid #94a3b8; /* Thicker, more prominent border */
+  background: #ffffff; /* White background for contrast */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Add shadow to canvas */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add hover effect */
+}
+
+.canvas:hover {
+  transform: scale(1.02); /* Slight scale on hover */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
 .hint {
   position: absolute;
-  inset: 16px;
+  inset: 20px; /* Increased inset */
   display: grid;
   place-items: center;
-  color: var(--muted);
+  color: #475569; /* Darker, more visible color */
   text-align: center;
   pointer-events: none;
+  font-size: 16px; /* Larger font size */
+  font-weight: 500; /* Medium weight */
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  padding: 20px; /* Added padding */
+  border-radius: calc(var(--radius-sm) * 1.5); /* Rounded corners */
+  border: 1px solid #e2e8f0; /* Subtle border */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Light shadow */
 }
 
 @media (max-width: 900px) {
