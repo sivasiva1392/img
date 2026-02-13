@@ -290,20 +290,20 @@
           <h5>🎨 Image Filters & Effects</h5>
           <p class="text-muted">Professional photo editing tools completely free. No registration, no watermarks, instant results.</p>
           <ul class="list-unstyled">
-            <li><a href="#filters" class="text-decoration-none">🎨 All Filters</a></li>
-            <li><a href="#shapes" class="text-decoration-none">✂️ Shape Masks</a></li>
-            <li><a href="#transform" class="text-decoration-none">🔄 Transform Tools</a></li>
-            <li><a href="#formats" class="text-decoration-none">💾 Format Options</a></li>
+            <li><a href="#filters" class="text-decoration-none feature-link" data-feature="filters">🎨 All Filters</a></li>
+            <li><a href="#shapes" class="text-decoration-none feature-link" data-feature="shapes">✂️ Shape Masks</a></li>
+            <li><a href="#transform" class="text-decoration-none feature-link" data-feature="transform">🔄 Transform Tools</a></li>
+            <li><a href="#formats" class="text-decoration-none feature-link" data-feature="formats">💾 Format Options</a></li>
           </ul>
         </div>
         <div class="col-md-4">
           <h5>📚 Popular Features</h5>
           <ul class="list-unstyled">
-            <li><a href="#vintage" class="text-decoration-none">📷 Vintage Filter</a></li>
-            <li><a href="#blackwhite" class="text-decoration-none">⚫ Black & White</a></li>
-            <li><a href="#blur" class="text-decoration-none">💫 Blur Effect</a></li>
-            <li><a href="#brightness" class="text-decoration-none">☀️ Brightness Control</a></li>
-            <li><a href="#contrast" class="text-decoration-none">◐ Contrast Adjustment</a></li>
+            <li><a href="#vintage" class="text-decoration-none feature-link" data-feature="vintage">📷 Vintage Filter</a></li>
+            <li><a href="#blackwhite" class="text-decoration-none feature-link" data-feature="blackwhite">⚫ Black & White</a></li>
+            <li><a href="#blur" class="text-decoration-none feature-link" data-feature="blur">💫 Blur Effect</a></li>
+            <li><a href="#brightness" class="text-decoration-none feature-link" data-feature="brightness">☀️ Brightness Control</a></li>
+            <li><a href="#contrast" class="text-decoration-none feature-link" data-feature="contrast">◐ Contrast Adjustment</a></li>
           </ul>
         </div>
         <div class="col-md-4">
@@ -320,6 +320,24 @@
       </div>
     </div>
   </footer>
+
+  <!-- Feature Explanation Modal -->
+  <div class="modal" id="featureModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="featureModalLabel">Feature Details</h5>
+          <button type="button" class="btn-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body" id="featureModalBody">
+          <!-- Content will be dynamically inserted here -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

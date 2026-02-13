@@ -924,6 +924,248 @@
     download();
   });
 
+  // Feature explanation modal functionality
+  const featureModal = document.getElementById('featureModal');
+  const featureModalLabel = document.getElementById('featureModalLabel');
+  const featureModalBody = document.getElementById('featureModalBody');
+  const modalClose = featureModal.querySelector('.btn-close, .btn-secondary');
+
+  // Simple modal functions
+  function showModal() {
+    featureModal.style.display = 'block';
+    featureModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideModal() {
+    featureModal.style.display = 'none';
+    featureModal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal events
+  modalClose.addEventListener('click', hideModal);
+  featureModal.addEventListener('click', (e) => {
+    if (e.target === featureModal) {
+      hideModal();
+    }
+  });
+
+  // Escape key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && featureModal.classList.contains('show')) {
+      hideModal();
+    }
+  });
+
+  const featureExplanations = {
+    filters: {
+      title: '🎨 All Image Filters',
+      content: `
+        <h6>Professional Image Filters</h6>
+        <p>Our image editor includes <strong>15+ professional filters</strong> to transform your photos:</p>
+        <ul>
+          <li><strong>Grayscale:</strong> Convert to classic black and white</li>
+          <li><strong>Sepia:</strong> Warm vintage tone effect</li>
+          <li><strong>Invert:</strong> Reverse all colors for artistic effect</li>
+          <li><strong>Blur:</strong> Soften focus with adjustable intensity</li>
+          <li><strong>Brightness:</strong> Lighten or darken your images</li>
+          <li><strong>Contrast:</strong> Enhance difference between light and dark areas</li>
+          <li><strong>Vintage:</strong> Classic retro photo appearance</li>
+          <li><strong>Cold/Warm:</strong> Adjust color temperature</li>
+          <li><strong>Dramatic:</strong> High contrast artistic effect</li>
+          <li><strong>Black & White:</strong> Pure monochrome conversion</li>
+          <li><strong>Sunset/Ocean/Forest:</strong> Themed color grading</li>
+          <li><strong>Polaroid:</strong> Instant camera style effect</li>
+        </ul>
+        <p><strong>Perfect for:</strong> Social media posts, artistic projects, photo enhancement</p>
+      `
+    },
+    shapes: {
+      title: '✂️ Shape Masks',
+      content: `
+        <h6>Crop Images into Shapes</h6>
+        <p>Transform your photos into <strong>11 different shapes</strong> for creative designs:</p>
+        <ul>
+          <li><strong>Circle:</strong> Perfect for profile pictures</li>
+          <li><strong>Rounded:</strong> Soft cornered rectangles</li>
+          <li><strong>Star:</strong> Eye-catching five-pointed star</li>
+          <li><strong>Heart:</strong> Romantic heart shape</li>
+          <li><strong>Hexagon:</strong> Modern six-sided shape</li>
+          <li><strong>Diamond:</strong> Elegant diamond cutout</li>
+          <li><strong>Triangle:</strong> Dynamic triangular shape</li>
+          <li><strong>Pentagon:</strong> Five-sided geometric shape</li>
+          <li><strong>Cross:</strong> Religious or decorative design</li>
+          <li><strong>Ellipse:</strong> Stretched oval shape</li>
+        </ul>
+        <p><strong>Use cases:</strong> Logos, avatars, badges, decorative elements</p>
+      `
+    },
+    transform: {
+      title: '🔄 Transform Tools',
+      content: `
+        <h6>Image Transformation Tools</h6>
+        <p><strong>Flip and rotate</strong> your images with precision controls:</p>
+        <ul>
+          <li><strong>Flip Horizontal:</strong> Mirror image left to right</li>
+          <li><strong>Flip Vertical:</strong> Mirror image top to bottom</li>
+          <li><strong>Rotate Left:</strong> 90-degree counter-clockwise rotation</li>
+          <li><strong>Rotate Right:</strong> 90-degree clockwise rotation</li>
+        </ul>
+        <p><strong>Applications:</strong></p>
+        <ul>
+          <li>Correct photo orientation</li>
+          <li>Create mirror effects</li>
+          <li>Adjust scanned images</li>
+          <li>Design symmetrical patterns</li>
+        </ul>
+        <p><strong>Tip:</strong> Combine multiple transformations for unique effects!</p>
+      `
+    },
+    formats: {
+      title: '💾 Format Options',
+      content: `
+        <h6>Output Format Guide</h6>
+        <p>Choose the <strong>best format</strong> for your specific needs:</p>
+        <div class="row">
+          <div class="col-md-6">
+            <h6>🖼️ PNG</h6>
+            <ul>
+              <li>Best image quality</li>
+              <li>Supports transparency</li>
+              <li>Lossless compression</li>
+              <li>Larger file sizes</li>
+            </ul>
+            <p><strong>Best for:</strong> Logos, graphics, images with transparency</p>
+          </div>
+          <div class="col-md-6">
+            <h6>📄 JPEG</h6>
+            <ul>
+              <li>Smaller file sizes</li>
+              <li>No transparency support</li>
+              <li>Adjustable quality</li>
+              <li>Good compression</li>
+            </ul>
+            <p><strong>Best for:</strong> Photos, web images, email attachments</p>
+          </div>
+          <div class="col-md-6">
+            <h6>🌐 WebP</h6>
+            <ul>
+              <li>Modern web format</li>
+              <li>Best compression ratio</li>
+              <li>Supports transparency</li>
+              <li>Smaller than PNG/JPEG</li>
+            </ul>
+            <p><strong>Best for:</strong> Modern websites, faster loading</p>
+          </div>
+          <div class="col-md-6">
+            <h6>🎨 BMP</h6>
+            <ul>
+              <li>Uncompressed quality</li>
+              <li>No quality loss</li>
+              <li>Very large files</li>
+              <li>Universal compatibility</li>
+            </ul>
+            <p><strong>Best for:</strong> Professional printing, archival</p>
+          </div>
+        </div>
+      `
+    },
+    vintage: {
+      title: '📷 Vintage Filter',
+      content: `
+        <h6>Vintage Photo Effect</h6>
+        <p>Transform your modern photos into <strong>timeless vintage images</strong> with warm tones and classic film characteristics.</p>
+        <h6>What it does:</h6>
+        <ul>
+          <li>Adds warm color grading</li>
+          <li>Creates film-like color shifts</li>
+          <li>Subtle vignetting effect</li>
+          <li>Reduces digital harshness</li>
+        </ul>
+        <p><strong>Perfect for:</strong> Instagram posts, retro designs, family photos, artistic projects</p>
+      `
+    },
+    blackwhite: {
+      title: '⚫ Black & White Filter',
+      content: `
+        <h6>Professional Black & White Conversion</h6>
+        <p>Convert your color photos to <strong>stunning monochrome</strong> with intelligent contrast preservation.</p>
+        <h6>Features:</h6>
+        <ul>
+          <li>Smart tonal range preservation</li>
+          <li>Enhanced contrast for impact</li>
+          <li>Professional darkroom look</li>
+          <li>Better than simple grayscale</li>
+        </ul>
+        <p><strong>Great for:</strong> Portraits, architecture, artistic photography, dramatic effects</p>
+      `
+    },
+    blur: {
+      title: '💫 Blur Effect',
+      content: `
+        <h6>Adjustable Blur Effect</h6>
+        <p>Add <strong>professional blur effects</strong> with 9 intensity levels for creative control.</p>
+        <h6>Blur Levels:</h6>
+        <ul>
+          <li><strong>Levels 1-3:</strong> Subtle softening</li>
+          <li><strong>Levels 4-6:</strong> Moderate blur</li>
+          <li><strong>Levels 7-9:</strong> Heavy blur effect</li>
+        </ul>
+        <p><strong>Applications:</strong></p>
+        <ul>
+          <li>Background softening</li>
+          <li>Dreamy effects</li>
+          <li>Privacy protection</li>
+          <li>Artistic focus</li>
+        </ul>
+      `
+    },
+    brightness: {
+      title: '☀️ Brightness Control',
+      content: `
+        <h6>Brightness Adjustment Tool</h6>
+        <p>Fine-tune your image brightness with <strong>200 levels of control</strong> (-100 to +100).</p>
+        <h6>Usage:</h6>
+        <ul>
+          <li><strong>Negative values:</strong> Darken underexposed photos</li>
+          <li><strong>Positive values:</strong> Brighten dark images</li>
+          <li><strong>Range:</strong> -100 (completely dark) to +100 (completely bright)</li>
+        </ul>
+        <p><strong>Perfect for:</strong> Fixing lighting issues, enhancing mood, correcting exposure</p>
+      `
+    },
+    contrast: {
+      title: '◐ Contrast Adjustment',
+      content: `
+        <h6>Contrast Enhancement Tool</h6>
+        <p>Adjust image contrast with <strong>200 precision levels</strong> for professional results.</p>
+        <h6>How it works:</h6>
+        <ul>
+          <li><strong>Increase contrast:</strong> Makes dark areas darker, light areas brighter</li>
+          <li><strong>Decrease contrast:</strong> Flattens tonal range for softer look</li>
+          <li><strong>Range:</strong> -100 (flat) to +100 (high contrast)</li>
+        </ul>
+        <p><strong>Ideal for:</strong> Making photos pop, fixing flat images, creating dramatic effects</p>
+      `
+    }
+  };
+
+  // Add click handlers to feature links
+  document.querySelectorAll('.feature-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const feature = link.getAttribute('data-feature');
+      const explanation = featureExplanations[feature];
+      
+      if (explanation) {
+        featureModalLabel.textContent = explanation.title;
+        featureModalBody.innerHTML = explanation.content;
+        showModal();
+      }
+    });
+  });
+
   setControlsEnabled(false);
   setHintVisible(true);
 })();
