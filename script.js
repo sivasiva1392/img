@@ -289,6 +289,243 @@
     }
     return imageData;
   }
+
+  function applyCyberpunk(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      
+      // Cyberpunk color mapping - magenta, cyan, purple tones
+      d[i] = clampByte(r * 1.2 + 20);
+      d[i + 1] = clampByte(g * 0.8 - 10);
+      d[i + 2] = clampByte(b * 1.5 + 30);
+    }
+    return imageData;
+  }
+
+  function applyGlitch(imageData) {
+    const d = imageData.data;
+    const { width, height } = imageData;
+    
+    // Create RGB channel shifts for glitch effect
+    for (let i = 0; i < d.length; i += 4) {
+      const pixel = i / 4;
+      const x = pixel % width;
+      const y = Math.floor(pixel / width);
+      
+      // Random channel shifting
+      if (Math.random() > 0.95) {
+        const shift = Math.floor(Math.random() * 20) - 10;
+        const shiftedPixel = ((pixel + shift) % (width * height) + (width * height)) % (width * height);
+        const shiftedIndex = shiftedPixel * 4;
+        
+        if (Math.random() > 0.5) {
+          d[i] = d[shiftedIndex];
+        } else if (Math.random() > 0.5) {
+          d[i + 1] = d[shiftedIndex + 1];
+        } else {
+          d[i + 2] = d[shiftedIndex + 2];
+        }
+      }
+      
+      // Color channel separation
+      if (Math.random() > 0.98) {
+        if (x % 3 === 0) d[i] = 255;
+        if (x % 3 === 1) d[i + 1] = 255;
+        if (x % 3 === 2) d[i + 2] = 255;
+      }
+    }
+    return imageData;
+  }
+
+  function applyNeon(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      
+      // Neon glow effect - enhance bright colors
+      const brightness = (r + g + b) / 3;
+      
+      if (brightness > 128) {
+        d[i] = clampByte(r * 1.5);
+        d[i + 1] = clampByte(g * 1.2);
+        d[i + 2] = clampByte(b * 0.8);
+      } else {
+        d[i] = clampByte(r * 0.3);
+        d[i + 1] = clampByte(g * 0.3);
+        d[i + 2] = clampByte(b * 0.5);
+      }
+    }
+    return imageData;
+  }
+
+  function applyRetro(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      
+      // Retro color grading with faded tones
+      d[i] = clampByte(r * 0.9 + 15);
+      d[i + 1] = clampByte(g * 0.7 + 10);
+      d[i + 2] = clampByte(b * 0.6 + 5);
+    }
+    return imageData;
+  }
+
+  function applyThermal(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      
+      // Thermal vision - heat map colors
+      const heat = (r + g + b) / 3;
+      
+      if (heat > 200) {
+        d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; // White - hottest
+      } else if (heat > 150) {
+        d[i] = 255; d[i + 1] = 200; d[i + 2] = 100; // Yellow - hot
+      } else if (heat > 100) {
+        d[i] = 255; d[i + 1] = 100; d[i + 2] = 50;  // Orange - warm
+      } else if (heat > 50) {
+        d[i] = 100; d[i + 1] = 50; d[i + 2] = 25;   // Dark red - cool
+      } else {
+        d[i] = 20; d[i + 1] = 10; d[i + 2] = 5;     // Black - coldest
+      }
+    }
+    return imageData;
+  }
+
+  function applyXray(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      
+      // X-ray effect - invert and enhance edges
+      const gray = 0.299 * r + 0.587 * g + 0.114 * b;
+      const inverted = 255 - gray;
+      
+      d[i] = clampByte(inverted * 1.2);
+      d[i + 1] = clampByte(inverted * 1.1);
+      d[i + 2] = clampByte(inverted * 0.9);
+    }
+    return imageData;
+  }
+
+  function applySketch(imageData) {
+    const d = imageData.data;
+    const { width, height } = imageData;
+    const original = new Uint8ClampedArray(d);
+    
+    // Edge detection for sketch effect
+    for (let y = 1; y < height - 1; y++) {
+      for (let x = 1; x < width - 1; x++) {
+        const idx = (y * width + x) * 4;
+        
+        // Simple edge detection
+        const tl = ((y - 1) * width + (x - 1)) * 4;
+        const tm = ((y - 1) * width + x) * 4;
+        const ml = (y * width + (x - 1)) * 4;
+        const mm = idx;
+        const mr = (y * width + (x + 1)) * 4;
+        const bl = ((y + 1) * width + (x - 1)) * 4;
+        const bm = ((y + 1) * width + x) * 4;
+        const br = ((y + 1) * width + (x + 1)) * 4;
+        
+        // Sobel edge detection
+        const gx = -original[tl] - original[tm] - 2*original[ml] + 2*original[mr] + original[bl] + original[br];
+        const gy = -original[tl] - 2*original[tm] - original[ml] + original[bl] + 2*original[bm] + original[br];
+        
+        const edge = Math.sqrt(gx * gx + gy * gy);
+        
+        if (edge > 30) {
+          d[idx] = 0;
+          d[idx + 1] = 0;
+          d[idx + 2] = 0;
+        } else {
+          d[idx] = 255;
+          d[idx + 1] = 255;
+          d[idx + 2] = 255;
+        }
+      }
+    }
+    return imageData;
+  }
+
+  function applyCartoon(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      
+      // Cartoon effect - posterize colors
+      d[i] = clampByte(Math.floor(r / 64) * 64);
+      d[i + 1] = clampByte(Math.floor(g / 64) * 64);
+      d[i + 2] = clampByte(Math.floor(b / 64) * 64);
+    }
+    return imageData;
+  }
+
+  function applyOilPaint(imageData) {
+    const d = imageData.data;
+    const { width, height } = imageData;
+    const original = new Uint8ClampedArray(d);
+    
+    // Oil painting effect - color averaging
+    for (let y = 2; y < height - 2; y++) {
+      for (let x = 2; x < width - 2; x++) {
+        let r = 0, g = 0, b = 0, count = 0;
+        
+        // Sample surrounding pixels
+        for (let dy = -2; dy <= 2; dy++) {
+          for (let dx = -2; dx <= 2; dx++) {
+            const idx = ((y + dy) * width + (x + dx)) * 4;
+            r += original[idx];
+            g += original[idx + 1];
+            b += original[idx + 2];
+            count++;
+          }
+        }
+        
+        const idx = (y * width + x) * 4;
+        d[idx] = clampByte(r / count);
+        d[idx + 1] = clampByte(g / count);
+        d[idx + 2] = clampByte(b / count);
+      }
+    }
+    return imageData;
+  }
+
+  function applyWatercolor(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      
+      // Watercolor effect - soft, blended colors
+      d[i] = clampByte(r * 0.8 + 40);
+      d[i + 1] = clampByte(g * 0.9 + 30);
+      d[i + 2] = clampByte(b * 1.1 + 20);
+      
+      // Add transparency effect
+      const brightness = (d[i] + d[i + 1] + d[i + 2]) / 3;
+      if (brightness > 200) {
+        d[i + 3] = 200; // Semi-transparent
+      }
+    }
+    return imageData;
+  }
     function boxBlur(imageData, radius) {
     const r = Math.max(0, Math.min(20, Number(radius) || 0));
     if (r === 0) return imageData;
@@ -729,6 +966,26 @@
       img = applyForest(img);
     } else if (filter === 'polaroid') {
       img = applyPolaroid(img);
+    } else if (filter === 'cyberpunk') {
+      img = applyCyberpunk(img);
+    } else if (filter === 'glitch') {
+      img = applyGlitch(img);
+    } else if (filter === 'neon') {
+      img = applyNeon(img);
+    } else if (filter === 'retro') {
+      img = applyRetro(img);
+    } else if (filter === 'thermal') {
+      img = applyThermal(img);
+    } else if (filter === 'xray') {
+      img = applyXray(img);
+    } else if (filter === 'sketch') {
+      img = applySketch(img);
+    } else if (filter === 'cartoon') {
+      img = applyCartoon(img);
+    } else if (filter === 'oilpaint') {
+      img = applyOilPaint(img);
+    } else if (filter === 'watercolor') {
+      img = applyWatercolor(img);
     }
 
     // Apply shape
@@ -963,22 +1220,48 @@
       title: '🎨 All Image Filters',
       content: `
         <h6>Professional Image Filters</h6>
-        <p>Our image editor includes <strong>15+ professional filters</strong> to transform your photos:</p>
-        <ul>
-          <li><strong>Grayscale:</strong> Convert to classic black and white</li>
-          <li><strong>Sepia:</strong> Warm vintage tone effect</li>
-          <li><strong>Invert:</strong> Reverse all colors for artistic effect</li>
-          <li><strong>Blur:</strong> Soften focus with adjustable intensity</li>
-          <li><strong>Brightness:</strong> Lighten or darken your images</li>
-          <li><strong>Contrast:</strong> Enhance difference between light and dark areas</li>
-          <li><strong>Vintage:</strong> Classic retro photo appearance</li>
-          <li><strong>Cold/Warm:</strong> Adjust color temperature</li>
-          <li><strong>Dramatic:</strong> High contrast artistic effect</li>
-          <li><strong>Black & White:</strong> Pure monochrome conversion</li>
-          <li><strong>Sunset/Ocean/Forest:</strong> Themed color grading</li>
-          <li><strong>Polaroid:</strong> Instant camera style effect</li>
-        </ul>
-        <p><strong>Perfect for:</strong> Social media posts, artistic projects, photo enhancement</p>
+        <p>Our image editor includes <strong>25+ professional filters</strong> to transform your photos:</p>
+        <div class="row">
+          <div class="col-md-6">
+            <h6>🎨 Classic Filters</h6>
+            <ul>
+              <li><strong>Grayscale:</strong> Convert to classic black and white</li>
+              <li><strong>Sepia:</strong> Warm vintage tone effect</li>
+              <li><strong>Invert:</strong> Reverse all colors for artistic effect</li>
+              <li><strong>Black & White:</strong> Pure monochrome conversion</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h6>🌈 Color Grading</h6>
+            <ul>
+              <li><strong>Vintage:</strong> Classic retro photo appearance</li>
+              <li><strong>Cold/Warm:</strong> Adjust color temperature</li>
+              <li><strong>Sunset/Ocean/Forest:</strong> Themed color grading</li>
+              <li><strong>Dramatic:</strong> High contrast artistic effect</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h6>🎆 Creative Effects</h6>
+            <ul>
+              <li><strong>Cyberpunk:</strong> Futuristic neon color mapping</li>
+              <li><strong>Glitch:</strong> Digital distortion effect</li>
+              <li><strong>Neon Glow:</strong> Bright neon lighting effect</li>
+              <li><strong>Retro:</strong> Faded vintage color tones</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h6>🎨 Artistic Styles</h6>
+            <ul>
+              <li><strong>Thermal Vision:</strong> Heat map color effect</li>
+              <li><strong>X-Ray:</strong> Inverted edge enhancement</li>
+              <li><strong>Sketch:</strong> Pencil drawing edge detection</li>
+              <li><strong>Cartoon:</strong> Posterized color effect</li>
+              <li><strong>Oil Painting:</strong> Impressionist color blending</li>
+              <li><strong>Watercolor:</strong> Soft transparent water effect</li>
+            </ul>
+          </div>
+        </div>
+        <p><strong>Perfect for:</strong> Social media posts, artistic projects, photo enhancement, creative designs</p>
       `
     },
     shapes: {
