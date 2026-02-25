@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
   <!-- SEO Meta Tags -->
-  <title>Free Online Image Filters & Photo Editor - Apply Professional Effects</title>
+  <title>Pixify Now | Free Online Image Filters & Photo Editor - Apply Professional Effects</title>
   <meta name="description" content="Free online image editor with 20+ professional filters. Apply vintage, black & white, blur, brightness effects. Transform images, add shapes, rotate, flip. No download required." />
   <meta name="keywords" content="image filters, photo editor, online photo editor, free image editor, image effects, photo filters, vintage filter, black and white, blur image, brightness adjust, contrast, image tools, photo editing online, image transform" />
   <meta name="author" content="Image Filters App" />
@@ -93,9 +93,14 @@
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
       <h5 class="my-0 mr-md-auto font-weight-normal"><img src="logo.png" alt="Pixify Now" style="width: auto; height: 25px;"> Pixify Now</h5>
+      <div class="flex-grow-1"></div>
+      <button id="toggleHeaderBtn" class="btn btn-outline-primary btn-sm" type="button">
+        <span id="toggleIcon">👁️</span> <span id="toggleText">Show Header</span>
+      </button>
     </div>
+    
   <main class="app container py-4">
-    <header class="app__header text-center mb-3">
+    <header class="app__header text-center mb-3" id="appHeader">
       <h1 class="app__title mb-1">Free Online Image Filters & Photo Editor</h1>
       <p class="app__subtitle mb-0">Upload an image, apply professional filters, transform your photos, and download your edited images instantly. No registration required.</p>
       <div class="app__description mt-3">
@@ -105,7 +110,7 @@
       </div>
     </header>
 
-    <section class="features-section mb-4">
+    <section class="features-section mb-4" id="featuresSection">
       <div class="row text-center">
         <div class="col-md-3 col-6 mb-3">
           <div class="feature-card">

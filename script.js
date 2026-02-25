@@ -28,6 +28,14 @@
   const rotateLeftBtn = document.getElementById('rotateLeftBtn');
   const rotateRightBtn = document.getElementById('rotateRightBtn');
 
+  // Toggle Header Elements
+  const toggleHeaderBtn = document.getElementById('toggleHeaderBtn');
+  const toggleIcon = document.getElementById('toggleIcon');
+  const toggleText = document.getElementById('toggleText');
+  const appHeader = document.getElementById('appHeader');
+  const featuresSection = document.getElementById('featuresSection');
+  const appContainer = document.querySelector('.app');
+
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
   let originalImageData = null;
@@ -1179,6 +1187,56 @@
 
   downloadBtn.addEventListener('click', () => {
     download();
+  });
+
+  // Toggle Header Functionality
+  let isHeaderVisible = false; // Start with hidden header
+  
+  // Initially hide header and features
+  appHeader.classList.add('hidden');
+  featuresSection.classList.add('hidden');
+  appContainer.classList.add('compact');
+  toggleIcon.textContent = '👁️‍🗨️';
+  toggleText.textContent = 'Show Header';
+  
+  // Auto-show header after 1 second, then hide after 8 seconds
+  setTimeout(() => {
+    isHeaderVisible = true;
+    appHeader.classList.remove('hidden');
+    featuresSection.classList.remove('hidden');
+    appContainer.classList.remove('compact');
+    toggleIcon.textContent = '👁️';
+    toggleText.textContent = 'Hide Header';
+    
+    // Auto-hide after 8 seconds (total 9 seconds from page load)
+    setTimeout(() => {
+      isHeaderVisible = false;
+      appHeader.classList.add('hidden');
+      featuresSection.classList.add('hidden');
+      appContainer.classList.add('compact');
+      toggleIcon.textContent = '👁️‍🗨️';
+      toggleText.textContent = 'Show Header';
+    }, 8000);
+  }, 1000); // 1 second delay before showing
+  
+  toggleHeaderBtn.addEventListener('click', () => {
+    isHeaderVisible = !isHeaderVisible;
+    
+    if (isHeaderVisible) {
+      // Show header and features
+      appHeader.classList.remove('hidden');
+      featuresSection.classList.remove('hidden');
+      appContainer.classList.remove('compact');
+      toggleIcon.textContent = '👁️';
+      toggleText.textContent = 'Hide Header';
+    } else {
+      // Hide header and features
+      appHeader.classList.add('hidden');
+      featuresSection.classList.add('hidden');
+      appContainer.classList.add('compact');
+      toggleIcon.textContent = '👁️‍🗨️';
+      toggleText.textContent = 'Show Header';
+    }
   });
 
   // Feature explanation modal functionality
