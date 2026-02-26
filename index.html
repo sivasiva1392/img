@@ -149,13 +149,54 @@
 </head>
 
 <body>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-      <h5 class="my-0 mr-md-auto font-weight-normal"><img src="logo.png" alt="Pixify Now" style="width: auto; height: 25px;"> Pixify Now</h5>
-      <div class="flex-grow-1"></div>
-      <button id="toggleHeaderBtn" class="btn btn-outline-primary btn-sm" type="button">
-        <span id="toggleIcon">👁️</span> <span id="toggleText">Show Header</span>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="index.html">
+        <img src="logo.png" alt="Pixify Now" style="width: auto; height: 30px;"> PixifyNow
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
       </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <div class="navbar-nav">
+          <a class="nav-link active bg-primary text-white rounded px-3 py-2 mx-1" href="index.html">
+            🎨 <strong>Editor</strong>
+          </a>
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="drawing.html">
+            ✏️ <strong>Drawing</strong>
+          </a>
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="meme.html">
+            😂 <strong>Meme</strong>
+          </a>
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="about.html">
+            ℹ️ <strong>About</strong>
+          </a>
+        </div>
+      </div>
     </div>
+  </nav>
+
+  <style>
+    .nav-link.hover-bg-primary:hover {
+      background-color: #007bff !important;
+      color: white !important;
+      transition: all 0.3s ease;
+    }
+    .navbar-brand {
+      transition: transform 0.2s ease;
+    }
+    .navbar-brand:hover {
+      transform: scale(1.05);
+    }
+    .nav-link {
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .nav-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,123,255,0.2);
+    }
+  </style>
     
   <main class="app container py-4">
     <header class="app__header text-center mb-3" id="appHeader">
@@ -488,7 +529,7 @@
       </div>
       <div class="text-center mt-4 pt-3 border-top">
         <p class="text-muted mb-0">© 2026 PixifyNow - Free Online Photo Editor. All rights reserved.</p>
-        <p class="text-muted small">Edit photos online with professional filters • No download required • Instant results</p>
+        <p class="text-muted small">Edit photos online with professional filters • No download required • Instant results • <a href="about.html" class="text-decoration-none">ℹ️ About</a></p>
       </div>
     </div>
   </footer>

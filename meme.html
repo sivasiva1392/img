@@ -1,0 +1,1756 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Free Meme Generator - PixifyNow | Create Funny Memes Online</title>
+  <meta name="description" content="Free online meme generator with templates, text styles, and effects. Create viral memes instantly with our easy-to-use meme maker." />
+  <meta name="keywords" content="meme generator, create memes, funny memes, meme maker, online meme creator, free meme generator" />
+  <meta name="author" content="PixifyNow Team" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Free Meme Generator - PixifyNow" />
+  <meta property="og:description" content="Create viral memes instantly with professional templates and text styles. Free, no registration required." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pixifynow.com/meme.html" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Meme Generator - PixifyNow" />
+  <meta name="twitter:description" content="Create viral memes instantly with professional templates. Completely free." />
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Impact&family=Arial&family=Comic+Neue:wght@700&family=Bebas+Neue&family=Oswald:wght@700&family=Roboto:wght@900&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="index.html">
+        <img src="logo.png" alt="Pixify Now" style="width: auto; height: 30px;"> PixifyNow
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <div class="navbar-nav">
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="index.html">
+            🎨 <strong>Editor</strong>
+          </a>
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="drawing.html">
+            ✏️ <strong>Drawing</strong>
+          </a>
+          <a class="nav-link active bg-primary text-white rounded px-3 py-2 mx-1" href="meme.html">
+            😂 <strong>Meme</strong>
+          </a>
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="about.html">
+            ℹ️ <strong>About</strong>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <style>
+    .nav-link.hover-bg-primary:hover {
+      background-color: #007bff !important;
+      color: white !important;
+      transition: all 0.3s ease;
+    }
+    .navbar-brand {
+      transition: transform 0.2s ease;
+    }
+    .navbar-brand:hover {
+      transform: scale(1.05);
+    }
+    .nav-link {
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .nav-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,123,255,0.2);
+    }
+    
+    .meme-canvas {
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .template-card {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .template-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      border-color: #007bff;
+    }
+    
+    .template-card.active {
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0,123,255,0.2);
+    }
+    
+    .template-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    
+    .text-style-btn {
+      padding: 8px 16px;
+      border: 2px solid #dee2e6;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: bold;
+    }
+    
+    .text-style-btn:hover {
+      background: #f8f9fa;
+      transform: translateY(-2px);
+    }
+    
+    .text-style-btn.active {
+      background: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+    
+    .color-picker {
+      width: 50px;
+      height: 40px;
+      border: 2px solid #dee2e6;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    
+    .text-input {
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+    
+    .text-input:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+    }
+    
+    .upload-area {
+      border: 3px dashed #dee2e6;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      background: #f8f9fa;
+    }
+    
+    .upload-area:hover {
+      border-color: #007bff;
+      background: #e7f3ff;
+    }
+    
+    .upload-area.dragover {
+      border-color: #007bff;
+      background: #e7f3ff;
+      transform: scale(1.02);
+    }
+    
+    .meme-text {
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      left: 0;
+      font-weight: bold;
+      text-transform: uppercase;
+      -webkit-text-stroke: 2px black;
+      text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+      user-select: none;
+      cursor: move;
+    }
+    
+    .meme-text.top {
+      top: 10px;
+    }
+    
+    .meme-text.bottom {
+      bottom: 10px;
+    }
+    
+    .meme-text.custom {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
+
+  <!-- Main Content -->
+  <main class="container py-4">
+    <!-- Header -->
+    <div class="text-center mb-4">
+      <h1 class="display-5 fw-bold mb-2">😂 Meme Generator</h1>
+      <p class="lead text-muted">Create viral memes instantly with templates, text styles, and effects</p>
+    </div>
+
+
+
+    <!-- Meme Editor -->
+    <div class="row">
+      <!-- Left Sidebar -->
+      <div class="col-lg-3">
+        <!-- Upload & Templates -->
+        <div class="card shadow-sm mb-3">
+          <div class="card-body p-3">
+            <h6 class="card-title mb-3">📤 Upload Image</h6>
+            <div class="upload-area" id="uploadAreaSidebar" style="padding: 20px; min-height: 120px;">
+              <div class="text-center">
+                <i class="fas fa-cloud-upload-alt fa-2x text-muted mb-2"></i>
+                <h6 style="font-size: 14px;">Drag & Drop</h6>
+                <p class="text-muted small mb-2">or</p>
+                <input type="file" id="imageUploadSidebar" accept="image/*" style="display: none;">
+                <button class="btn btn-primary btn-sm" onclick="document.getElementById('imageUploadSidebar').click()">
+                  📁 Choose File
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card shadow-sm">
+          <div class="card-body p-3">
+            <h6 class="card-title mb-3">🎭 Quick Templates</h6>
+            <div class="row g-2">
+              <div class="col-6 mb-2">
+                <div class="template-card" data-template="drake" style="cursor: pointer;">
+                  <img src="https://picsum.photos/seed/drake/150/100" alt="Drake" style="height: 80px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 11px;">Drake</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mb-2">
+                <div class="template-card" data-template="success-kid" style="cursor: pointer;">
+                  <img src="https://picsum.photos/seed/success-kid/150/100" alt="Success Kid" style="height: 80px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 11px;">Success Kid</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mb-2">
+                <div class="template-card" data-template="butterfly" style="cursor: pointer;">
+                  <img src="https://picsum.photos/seed/butterfly/150/100" alt="Butterfly" style="height: 80px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 11px;">Butterfly</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mb-2">
+                <div class="template-card" data-template="change-my-mind" style="cursor: pointer;">
+                  <img src="https://picsum.photos/seed/change-mind/150/100" alt="Change My Mind" style="height: 80px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 11px;">Change Mind</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mb-2">
+                <div class="template-card" data-template="panik-kar" style="cursor: pointer;">
+                  <img src="https://picsum.photos/seed/panik-kar/150/100" alt="Panik Kar" style="height: 80px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 11px;">Panik Kar</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mb-2">
+                <div class="template-card" data-template="stonks" style="cursor: pointer;">
+                  <img src="https://picsum.photos/seed/stonks/150/100" alt="Stonks" style="height: 80px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 11px;">Stonks</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-2">
+              <button class="btn btn-outline-primary btn-sm" id="showMoreTemplatesBtn">
+                📋 View All Templates
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main Canvas Area -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <h5 class="card-title mb-3">🎨 Meme Canvas</h5>
+            <div class="position-relative" id="canvasContainer">
+              <canvas id="memeCanvas" class="meme-canvas" width="600" height="600"></canvas>
+              <div class="meme-text top" id="topText" contenteditable="true">TOP TEXT</div>
+              <div class="meme-text bottom" id="bottomText" contenteditable="true">BOTTOM TEXT</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Sidebar -->
+      <div class="col-lg-3">
+        <!-- Text Controls -->
+        <div class="card shadow-sm mb-3">
+          <div class="card-body p-3">
+            <h6 class="card-title">📝 Text Controls</h6>
+            
+            <div class="mb-3">
+              <label class="form-label fw-bold">Top Text</label>
+              <input type="text" class="form-control text-input" id="topTextInput" placeholder="Enter top text..." value="TOP TEXT">
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label fw-bold">Bottom Text</label>
+              <input type="text" class="form-control text-input" id="bottomTextInput" placeholder="Enter bottom text..." value="BOTTOM TEXT">
+            </div>
+            
+            <div class="mb-3">
+              <button class="btn btn-outline-primary btn-sm w-100" id="addTextBtn">
+                ➕ Add Custom Text
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Text Style -->
+        <div class="card shadow-sm mb-3">
+          <div class="card-body p-3">
+            <h6 class="card-title">🎨 Text Style</h6>
+            
+            <div class="mb-3">
+              <label class="form-label fw-bold">Font</label>
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="text-style-btn active" data-font="Impact" style="font-family: 'Impact'">Impact</button>
+                <button class="text-style-btn" data-font="Arial" style="font-family: 'Arial'">Arial</button>
+                <button class="text-style-btn" data-font="Comic Neue" style="font-family: 'Comic Neue'">Comic</button>
+                <button class="text-style-btn" data-font="Bebas Neue" style="font-family: 'Bebas Neue'">Bebas</button>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label fw-bold">Text Color</label>
+              <div class="d-flex gap-2 align-items-center">
+                <input type="color" class="color-picker" id="textColor" value="#ffffff">
+                <input type="color" class="color-picker" id="strokeColor" value="#000000">
+                <small class="text-muted">Fill / Stroke</small>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label fw-bold">Font Size: <span id="fontSizeValue">48</span>px</label>
+              <input type="range" class="form-range" id="fontSize" min="20" max="100" value="48">
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label fw-bold">Stroke Width: <span id="strokeWidthValue">2</span>px</label>
+              <input type="range" class="form-range" id="strokeWidth" min="0" max="10" value="2">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Actions -->
+        <div class="card shadow-sm">
+          <div class="card-body p-3">
+            <h6 class="card-title">⚡ Actions</h6>
+            <div class="d-grid gap-2">
+              <button class="btn btn-success" id="downloadBtn">💾 Download Meme</button>
+              <button class="btn btn-outline-primary" id="resetBtn">🔄 Reset Text</button>
+              <button class="btn btn-outline-secondary" id="clearBtn">🗑️ Clear All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- Full Templates Section (Hidden by default) -->
+    <div class="row mb-4" id="templatesSection" style="display: none;">
+      <div class="col-lg-12">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <h5 class="card-title mb-3">🎭 All Meme Templates</h5>
+            <div class="row g-2">
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="drake">
+                  <img src="https://picsum.photos/seed/drake/200/150" alt="Drake Meme" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Drake</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="distracted">
+                  <img src="https://picsum.photos/seed/distracted/200/150" alt="Distracted Boyfriend" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Distracted BF</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="woman-yelling">
+                  <img src="https://picsum.photos/seed/woman/200/150" alt="Woman Yelling" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Woman</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="two-buttons">
+                  <img src="https://picsum.photos/seed/buttons/200/150" alt="Two Buttons" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Two Buttons</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="expanding-brain">
+                  <img src="https://picsum.photos/seed/brain/200/150" alt="Expanding Brain" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Brain</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="stonks">
+                  <img src="https://picsum.photos/seed/stonks/200/150" alt="Stonks" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Stonks</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="this-is-fine">
+                  <img src="https://picsum.photos/seed/fine/200/150" alt="This is Fine" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">This is Fine</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="surprised-pikachu">
+                  <img src="https://picsum.photos/seed/pikachu/200/150" alt="Surprised Pikachu" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Pikachu</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="success-kid">
+                  <img src="https://picsum.photos/seed/success-kid/200/150" alt="Success Kid" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Success Kid</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="butterfly">
+                  <img src="https://picsum.photos/seed/butterfly/200/150" alt="Butterfly" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Butterfly</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="change-my-mind">
+                  <img src="https://picsum.photos/seed/change-mind/200/150" alt="Change My Mind" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Change Mind</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="panik-kar">
+                  <img src="https://picsum.photos/seed/panik-kar/200/150" alt="Panik Kar" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Panik Kar</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="sad-cat">
+                  <img src="https://picsum.photos/seed/sad-cat/200/150" alt="Sad Cat" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Sad Cat</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="happy-dog">
+                  <img src="https://picsum.photos/seed/happy-dog/200/150" alt="Happy Dog" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Happy Dog</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="confused-math">
+                  <img src="https://picsum.photos/seed/math-lady/200/150" alt="Confused Math" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Math Lady</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="distracted-boyfriend">
+                  <img src="https://picsum.photos/seed/distracted-meme/200/150" alt="Distracted BF" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Distracted BF</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="woman-yelling-cat">
+                  <img src="https://picsum.photos/seed/woman-cat/200/150" alt="Woman Cat" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Woman Cat</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="mocking-spongebob">
+                  <img src="https://picsum.photos/seed/spongebob/200/150" alt="Mocking Bob" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Mocking Bob</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="evil-kermit">
+                  <img src="https://picsum.photos/seed/kermit/200/150" alt="Evil Kermit" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Evil Kermit</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="drake-no">
+                  <img src="https://picsum.photos/seed/drake-no/200/150" alt="Drake No" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Drake No</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="brain-rot">
+                  <img src="https://picsum.photos/seed/brain-rot/200/150" alt="Brain Rot" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Brain Rot</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="nerd-face">
+                  <img src="https://picsum.photos/seed/nerd-face/200/150" alt="Nerd Face" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Nerd Face</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="awkward-monkey">
+                  <img src="https://picsum.photos/seed/monkey-awkward/200/150" alt="Awkward Monkey" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Awkward Monkey</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="change-my-mind-2">
+                  <img src="https://picsum.photos/seed/change-mind-2/200/150" alt="Change Mind 2" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Change Mind 2</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="success-baby">
+                  <img src="https://picsum.photos/seed/success-baby/200/150" alt="Success Baby" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Success Baby</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="crying-cat">
+                  <img src="https://picsum.photos/seed/crying-cat/200/150" alt="Crying Cat" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Crying Cat</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="laughing-dog">
+                  <img src="https://picsum.photos/seed/laughing-dog/200/150" alt="Laughing Dog" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Laughing Dog</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="shocked-cat">
+                  <img src="https://picsum.photos/seed/shocked-cat/200/150" alt="Shocked Cat" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Shocked Cat</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="thinking-face">
+                  <img src="https://picsum.photos/seed/thinking-face/200/150" alt="Thinking Face" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Thinking Face</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="facepalm">
+                  <img src="https://picsum.photos/seed/facepalm/200/150" alt="Facepalm" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Facepalm</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="disaster-girl">
+                  <img src="https://picsum.photos/seed/disaster-girl/200/150" alt="Disaster Girl" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Disaster Girl</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="oh-no">
+                  <img src="https://picsum.photos/seed/oh-no/200/150" alt="Oh No" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Oh No</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="yes-chad">
+                  <img src="https://picsum.photos/seed/yes-chad/200/150" alt="Yes Chad" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Yes Chad</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="virgin-vs-chad">
+                  <img src="https://picsum.photos/seed/virgin-chad/200/150" alt="Virgin vs Chad" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Virgin vs Chad</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="wholesome-100">
+                  <img src="https://picsum.photos/seed/wholesome-100/200/150" alt="Wholesome 100" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Wholesome 100</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="biden-cringe">
+                  <img src="https://picsum.photos/seed/biden-cringe/200/150" alt="Biden Cringe" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Biden Cringe</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="trump-stare">
+                  <img src="https://picsum.photos/seed/trump-stare/200/150" alt="Trump Stare" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Trump Stare</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="obama-meme">
+                  <img src="https://picsum.photos/seed/obama-meme/200/150" alt="Obama Meme" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Obama Meme</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="this-is-fine-2">
+                  <img src="https://picsum.photos/seed/this-is-fine-2/200/150" alt="This is Fine 2" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">This is Fine 2</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="surprised-pikachu-2">
+                  <img src="https://picsum.photos/seed/pikachu-surprised-2/200/150" alt="Surprised Pikachu 2" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Pikachu 2</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="stonks-2">
+                  <img src="https://picsum.photos/seed/stonks-2/200/150" alt="Stonks 2" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Stonks 2</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="chad-vs-virgin">
+                  <img src="https://picsum.photos/seed/chad-virgin/200/150" alt="Chad vs Virgin" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Chad vs Virgin</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="gigachad">
+                  <img src="https://picsum.photos/seed/gigachad/200/150" alt="GigaChad" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">GigaChad</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="ultra-chad">
+                  <img src="https://picsum.photos/seed/ultra-chad/200/150" alt="Ultra Chad" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Ultra Chad</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="sigma-male">
+                  <img src="https://picsum.photos/seed/sigma-male/200/150" alt="Sigma Male" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Sigma Male</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="based-and-redpilled">
+                  <img src="https://picsum.photos/seed/based-redpilled/200/150" alt="Based and Redpilled" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Based & Redpilled</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="funny-cat">
+                  <img src="https://picsum.photos/seed/funny-cat/200/150" alt="Funny Cat" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Funny Cat</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="cute-dog">
+                  <img src="https://picsum.photos/seed/cute-dog/200/150" alt="Cute Dog" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Cute Dog</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="happy-cat">
+                  <img src="https://picsum.photos/seed/happy-cat/200/150" alt="Happy Cat" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Happy Cat</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="silly-monkey">
+                  <img src="https://picsum.photos/seed/silly-monkey/200/150" alt="Silly Monkey" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Silly Monkey</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="crazy-eyes">
+                  <img src="https://picsum.photos/seed/crazy-eyes/200/150" alt="Crazy Eyes" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Crazy Eyes</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="big-smile">
+                  <img src="https://picsum.photos/seed/big-smile/200/150" alt="Big Smile" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Big Smile</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="wink-face">
+                  <img src="https://picsum.photos/seed/wink-face/200/150" alt="Wink Face" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Wink Face</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="cool-guy">
+                  <img src="https://picsum.photos/seed/cool-guy/200/150" alt="Cool Guy" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Cool Guy</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="party-time">
+                  <img src="https://picsum.photos/seed/party-time/200/150" alt="Party Time" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Party Time</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="dance-moves">
+                  <img src="https://picsum.photos/seed/dance-moves/200/150" alt="Dance Moves" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Dance Moves</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="lol-moment">
+                  <img src="https://picsum.photos/seed/lol-moment/200/150" alt="LOL Moment" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">LOL Moment</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="omg-reaction">
+                  <img src="https://picsum.photos/seed/omg-reaction/200/150" alt="OMG Reaction" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">OMG Reaction</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="epic-fail">
+                  <img src="https://picsum.photos/seed/epic-fail/200/150" alt="Epic Fail" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Epic Fail</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="win-moment">
+                  <img src="https://picsum.photos/seed/win-moment/200/150" alt="Win Moment" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Win Moment</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="lost-in-thought">
+                  <img src="https://picsum.photos/seed/lost-thought/200/150" alt="Lost in Thought" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Lost Thought</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="confused-puppy">
+                  <img src="https://picsum.photos/seed/confused-puppy/200/150" alt="Confused Puppy" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Confused Puppy</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="sleepy-cat">
+                  <img src="https://picsum.photos/seed/sleepy-cat/200/150" alt="Sleepy Cat" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Sleepy Cat</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="playful-bunny">
+                  <img src="https://picsum.photos/seed/playful-bunny/200/150" alt="Playful Bunny" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Playful Bunny</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="excited-bird">
+                  <img src="https://picsum.photos/seed/excited-bird/200/150" alt="Excited Bird" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Excited Bird</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="grumpy-cat">
+                  <img src="https://picsum.photos/seed/grumpy-cat/200/150" alt="Grumpy Cat" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Grumpy Cat</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="silly-duck">
+                  <img src="https://picsum.photos/seed/silly-duck/200/150" alt="Silly Duck" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Silly Duck</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="happy-panda">
+                  <img src="https://picsum.photos/seed/happy-panda/200/150" alt="Happy Panda" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Happy Panda</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="crazy-frog">
+                  <img src="https://picsum.photos/seed/crazy-frog/200/150" alt="Crazy Frog" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Crazy Frog</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="funny-bear">
+                  <img src="https://picsum.photos/seed/funny-bear/200/150" alt="Funny Bear" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Funny Bear</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="chill-vibes">
+                  <img src="https://picsum.photos/seed/chill-vibes/200/150" alt="Chill Vibes" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Chill Vibes</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="party-animal">
+                  <img src="https://picsum.photos/seed/party-animal/200/150" alt="Party Animal" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Party Animal</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="mood-swing">
+                  <img src="https://picsum.photos/seed/mood-swing/200/150" alt="Mood Swing" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Mood Swing</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="dramatic-gasp">
+                  <img src="https://picsum.photos/seed/dramatic-gasp/200/150" alt="Dramatic Gasp" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Dramatic Gasp</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="mind-blown">
+                  <img src="https://picsum.photos/seed/mind-blown/200/150" alt="Mind Blown" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Mind Blown</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="face-explode">
+                  <img src="https://picsum.photos/seed/face-explode/200/150" alt="Face Explode" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Face Explode</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="crazy-laugh">
+                  <img src="https://picsum.photos/seed/crazy-laugh/200/150" alt="Crazy Laugh" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Crazy Laugh</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="shocked-face">
+                  <img src="https://picsum.photos/seed/shocked-face/200/150" alt="Shocked Face" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Shocked Face</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="tears-of-joy">
+                  <img src="https://picsum.photos/seed/tears-joy/200/150" alt="Tears of Joy" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Tears of Joy</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="rolling-eyes">
+                  <img src="https://picsum.photos/seed/rolling-eyes/200/150" alt="Rolling Eyes" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Rolling Eyes</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="side-eye">
+                  <img src="https://picsum.photos/seed/side-eye/200/150" alt="Side Eye" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Side Eye</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="smirk-face">
+                  <img src="https://picsum.photos/seed/smirk-face/200/150" alt="Smirk Face" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Smirk Face</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="yawning-cat">
+                  <img src="https://picsum.photos/seed/yawning-cat/200/150" alt="Yawning Cat" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Yawning Cat</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="peeking-duck">
+                  <img src="https://picsum.photos/seed/peeking-duck/200/150" alt="Peeking Duck" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Peeking Duck</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="silly-goat">
+                  <img src="https://picsum.photos/seed/silly-goat/200/150" alt="Silly Goat" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Silly Goat</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="confused-koala">
+                  <img src="https://picsum.photos/seed/confused-koala/200/150" alt="Confused Koala" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Confused Koala</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="playful-fox">
+                  <img src="https://picsum.photos/seed/playful-fox/200/150" alt="Playful Fox" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Playful Fox</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="happy-hamster">
+                  <img src="https://picsum.photos/seed/happy-hamster/200/150" alt="Happy Hamster" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Happy Hamster</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="sleepy-bear">
+                  <img src="https://picsum.photos/seed/sleepy-bear/200/150" alt="Sleepy Bear" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Sleepy Bear</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="excited-rabbit">
+                  <img src="https://picsum.photos/seed/excited-rabbit/200/150" alt="Excited Rabbit" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Excited Rabbit</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="curious-owl">
+                  <img src="https://picsum.photos/seed/curious-owl/200/150" alt="Curious Owl" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Curious Owl</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="silly-penguin">
+                  <img src="https://picsum.photos/seed/silly-penguin/200/150" alt="Silly Penguin" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Silly Penguin</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="happy-turtle">
+                  <img src="https://picsum.photos/seed/happy-turtle/200/150" alt="Happy Turtle" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Happy Turtle</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="playful-dolphin">
+                  <img src="https://picsum.photos/seed/playful-dolphin/200/150" alt="Playful Dolphin" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Playful Dolphin</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="crazy-parrot">
+                  <img src="https://picsum.photos/seed/crazy-parrot/200/150" alt="Crazy Parrot" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Crazy Parrot</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="chicken-surprise">
+                  <img src="https://picsum.photos/seed/chicken-surprise/200/150" alt="Chicken Surprise" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Chicken Surprise</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="cow-meme">
+                  <img src="https://picsum.photos/seed/cow-meme/200/150" alt="Cow Meme" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Cow Meme</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="pig-funny">
+                  <img src="https://picsum.photos/seed/pig-funny/200/150" alt="Pig Funny" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Pig Funny</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="sheep-confused">
+                  <img src="https://picsum.photos/seed/sheep-confused/200/150" alt="Sheep Confused" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Sheep Confused</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <div class="template-card" data-template="horse-awkward">
+                  <img src="https://picsum.photos/seed/horse-awkward/200/150" alt="Horse Awkward" style="height: 120px;">
+                  <div class="p-1 text-center">
+                    <small class="fw-bold" style="font-size: 10px;">Horse Awkward</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="row mt-4">
+      <div class="col-lg-12">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <h5 class="card-title">📖 How to Create Memes</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <h6>🚀 Quick Steps:</h6>
+                <ol>
+                  <li><strong>Upload Image:</strong> Choose your own photo or select a template</li>
+                  <li><strong>Add Text:</strong> Enter top and bottom text</li>
+                  <li><strong>Customize Style:</strong> Choose font, colors, and size</li>
+                  <li><strong>Position Text:</strong> Drag text to position</li>
+                  <li><strong>Download:</strong> Save your meme as PNG</li>
+                </ol>
+              </div>
+              <div class="col-md-6">
+                <h6>💡 Pro Tips:</h6>
+                <ul>
+                  <li>📸 <strong>High contrast images</strong> work best</li>
+                  <li>📝 <strong>Keep text short</strong> and punchy</li>
+                  <li>🎨 <strong>Contrasting colors</strong> improve readability</li>
+                  <li>📏 <strong>Adjust font size</strong> for image dimensions</li>
+                  <li>💾 <strong>Save often</strong> to avoid losing work</li>
+                  <li>🎭 <strong>Use templates</strong> for popular formats</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app__footer mt-5 py-4 border-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>🎭 Creative Tools</h5>
+          <p class="text-muted">Professional creative tools for image editing, drawing, and meme creation. Express your creativity online.</p>
+          <ul class="list-unstyled">
+            <li><a href="index.html#filters" class="text-decoration-none">🎨 Image Filters</a></li>
+            <li><a href="drawing.html" class="text-decoration-none">✏️ Drawing Canvas</a></li>
+            <li><a href="meme.html" class="text-decoration-none">😂 Meme Generator</a></li>
+            <li><a href="index.html#color" class="text-decoration-none">🎨 Color Adjustment</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>📚 Meme Features</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-decoration-none">🎭 Popular Templates</a></li>
+            <li><a href="#" class="text-decoration-none">📝 Custom Text</a></li>
+            <li><a href="#" class="text-decoration-none">🎨 Font Styles</a></li>
+            <li><a href="#" class="text-decoration-none">🌈 Color Customization</a></li>
+            <li><a href="#" class="text-decoration-none">📤 Image Upload</a></li>
+            <li><a href="#" class="text-decoration-none">💾 PNG Download</a></li>
+            <li><a href="#" class="text-decoration-none">🎯 Text Positioning</a></li>
+            <li><a href="#" class="text-decoration-none">📏 Font Sizing</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>🌟 About This Tool</h5>
+          <p class="text-muted">Free online meme generator with templates and text customization. Create viral memes instantly without watermarks. Perfect for social media and entertainment.</p>
+          <div class="mt-2">
+            <small class="text-muted">🚀 Instant Creation | 💎 No Watermarks | 📱 Mobile Friendly | 💾 HD Export</small>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4 pt-3 border-top">
+        <p class="text-muted mb-0">© 2026 PixifyNow - Free Online Photo Editor. All rights reserved.</p>
+        <p class="text-muted small">Create viral memes online • Professional templates • No download required • <a href="about.html" class="text-decoration-none">ℹ️ About</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
+  <!-- Meme Generator Script -->
+  <script>
+    class MemeGenerator {
+      constructor() {
+        this.canvas = document.getElementById('memeCanvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.currentImage = null;
+        this.customTexts = [];
+        this.currentFont = 'Impact';
+        this.textColor = '#ffffff';
+        this.strokeColor = '#000000';
+        this.fontSize = 48;
+        this.strokeWidth = 2;
+        
+        this.setupEventListeners();
+        this.loadDefaultImage();
+      }
+      
+      setupEventListeners() {
+        // Upload functionality - Main upload area
+        const uploadArea = document.getElementById('uploadArea');
+        const imageUpload = document.getElementById('imageUpload');
+        
+        // Upload functionality - Sidebar upload area
+        const uploadAreaSidebar = document.getElementById('uploadAreaSidebar');
+        const imageUploadSidebar = document.getElementById('imageUploadSidebar');
+        
+        // Setup main upload area
+        if (uploadArea && imageUpload) {
+          uploadArea.addEventListener('click', () => imageUpload.click());
+          uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+          });
+          uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+          });
+          uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+              this.loadImage(file);
+            }
+          });
+          
+          imageUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+              this.loadImage(file);
+            }
+          });
+        }
+        
+        // Setup sidebar upload area
+        if (uploadAreaSidebar && imageUploadSidebar) {
+          uploadAreaSidebar.addEventListener('click', () => imageUploadSidebar.click());
+          uploadAreaSidebar.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadAreaSidebar.classList.add('dragover');
+          });
+          uploadAreaSidebar.addEventListener('dragleave', () => {
+            uploadAreaSidebar.classList.remove('dragover');
+          });
+          uploadAreaSidebar.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadAreaSidebar.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+              this.loadImage(file);
+            }
+          });
+          
+          imageUploadSidebar.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+              this.loadImage(file);
+            }
+          });
+        }
+        
+        // Template selection - Both main and sidebar templates
+        document.querySelectorAll('.template-card').forEach(card => {
+          card.addEventListener('click', () => {
+            document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            this.loadTemplate(card.dataset.template);
+          });
+        });
+        
+        // Show more templates button
+        const showMoreBtn = document.getElementById('showMoreTemplatesBtn');
+        if (showMoreBtn) {
+          showMoreBtn.addEventListener('click', () => {
+            const templatesSection = document.getElementById('templatesSection');
+            if (templatesSection) {
+              templatesSection.style.display = templatesSection.style.display === 'none' ? 'block' : 'none';
+              showMoreBtn.textContent = templatesSection.style.display === 'none' ? '📋 Hide Templates' : '📋 View All Templates';
+            }
+          });
+        }
+        
+        // Text inputs
+        document.getElementById('topTextInput').addEventListener('input', (e) => {
+          document.getElementById('topText').textContent = e.target.value || 'TOP TEXT';
+        });
+        
+        document.getElementById('bottomTextInput').addEventListener('input', (e) => {
+          document.getElementById('bottomText').textContent = e.target.value || 'BOTTOM TEXT';
+        });
+        
+        // Add custom text
+        document.getElementById('addTextBtn').addEventListener('click', () => {
+          this.addCustomText();
+        });
+        
+        // Font selection
+        document.querySelectorAll('.text-style-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.text-style-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            this.currentFont = btn.dataset.font;
+            this.updateTextStyle();
+          });
+        });
+        
+        // Color controls
+        document.getElementById('textColor').addEventListener('change', (e) => {
+          this.textColor = e.target.value;
+          this.updateTextStyle();
+        });
+        
+        document.getElementById('strokeColor').addEventListener('change', (e) => {
+          this.strokeColor = e.target.value;
+          this.updateTextStyle();
+        });
+        
+        // Size controls
+        document.getElementById('fontSize').addEventListener('input', (e) => {
+          this.fontSize = e.target.value;
+          document.getElementById('fontSizeValue').textContent = e.target.value;
+          this.updateTextStyle();
+        });
+        
+        document.getElementById('strokeWidth').addEventListener('input', (e) => {
+          this.strokeWidth = e.target.value;
+          document.getElementById('strokeWidthValue').textContent = e.target.value;
+          this.updateTextStyle();
+        });
+        
+        // Action buttons
+        document.getElementById('downloadBtn').addEventListener('click', () => this.downloadMeme());
+        document.getElementById('resetBtn').addEventListener('click', () => this.resetText());
+        document.getElementById('clearBtn').addEventListener('click', () => this.clearAll());
+        
+        // Make text draggable
+        this.makeTextDraggable(document.getElementById('topText'));
+        this.makeTextDraggable(document.getElementById('bottomText'));
+      }
+      
+      loadImage(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            this.currentImage = img;
+            this.drawImage();
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+      
+      loadTemplate(templateName) {
+        // In a real app, these would be actual meme template images
+        const templateUrls = {
+          'drake': 'https://picsum.photos/seed/drake-meme/600/600',
+          'distracted': 'https://picsum.photos/seed/distracted-meme/600/600',
+          'woman-yelling': 'https://picsum.photos/seed/woman-meme/600/600',
+          'two-buttons': 'https://picsum.photos/seed/buttons-meme/600/600',
+          'expanding-brain': 'https://picsum.photos/seed/brain-meme/600/600',
+          'stonks': 'https://picsum.photos/seed/stonks-meme/600/600',
+          'this-is-fine': 'https://picsum.photos/seed/fine-meme/600/600',
+          'surprised-pikachu': 'https://picsum.photos/seed/pikachu-meme/600/600',
+          'success-kid': 'https://picsum.photos/seed/success-kid/600/600',
+          'butterfly': 'https://picsum.photos/seed/butterfly/600/600',
+          'change-my-mind': 'https://picsum.photos/seed/change-mind/600/600',
+          'panik-kar': 'https://picsum.photos/seed/panik-kar/600/600',
+          'sad-cat': 'https://picsum.photos/seed/sad-cat/600/600',
+          'happy-dog': 'https://picsum.photos/seed/happy-dog/600/600',
+          'confused-math': 'https://picsum.photos/seed/math-lady/600/600',
+          'distracted-boyfriend': 'https://picsum.photos/seed/distracted-meme/600/600',
+          'woman-yelling-cat': 'https://picsum.photos/seed/woman-cat/600/600',
+          'mocking-spongebob': 'https://picsum.photos/seed/spongebob/600/600',
+          'evil-kermit': 'https://picsum.photos/seed/kermit/600/600',
+          'drake-no': 'https://picsum.photos/seed/drake-no/600/600',
+          'brain-rot': 'https://picsum.photos/seed/brain-rot/600/600',
+          'nerd-face': 'https://picsum.photos/seed/nerd-face/600/600',
+          'awkward-monkey': 'https://picsum.photos/seed/monkey-awkward/600/600',
+          'change-my-mind-2': 'https://picsum.photos/seed/change-mind-2/600/600',
+          'success-baby': 'https://picsum.photos/seed/success-baby/600/600',
+          'crying-cat': 'https://picsum.photos/seed/crying-cat/600/600',
+          'laughing-dog': 'https://picsum.photos/seed/laughing-dog/600/600',
+          'shocked-cat': 'https://picsum.photos/seed/shocked-cat/600/600',
+          'thinking-face': 'https://picsum.photos/seed/thinking-face/600/600',
+          'facepalm': 'https://picsum.photos/seed/facepalm/600/600',
+          'disaster-girl': 'https://picsum.photos/seed/disaster-girl/600/600',
+          'oh-no': 'https://picsum.photos/seed/oh-no/600/600',
+          'yes-chad': 'https://picsum.photos/seed/yes-chad/600/600',
+          'virgin-vs-chad': 'https://picsum.photos/seed/virgin-chad/600/600',
+          'wholesome-100': 'https://picsum.photos/seed/wholesome-100/600/600',
+          'biden-cringe': 'https://picsum.photos/seed/biden-cringe/600/600',
+          'trump-stare': 'https://picsum.photos/seed/trump-stare/600/600',
+          'obama-meme': 'https://picsum.photos/seed/obama-meme/600/600',
+          'this-is-fine-2': 'https://picsum.photos/seed/this-is-fine-2/600/600',
+          'surprised-pikachu-2': 'https://picsum.photos/seed/pikachu-surprised-2/600/600',
+          'stonks-2': 'https://picsum.photos/seed/stonks-2/600/600',
+          'chad-vs-virgin': 'https://picsum.photos/seed/chad-virgin/600/600',
+          'gigachad': 'https://picsum.photos/seed/gigachad/600/600',
+          'ultra-chad': 'https://picsum.photos/seed/ultra-chad/600/600',
+          'sigma-male': 'https://picsum.photos/seed/sigma-male/600/600',
+          'based-and-redpilled': 'https://picsum.photos/seed/based-redpilled/600/600',
+          'funny-cat': 'https://picsum.photos/seed/funny-cat/600/600',
+          'cute-dog': 'https://picsum.photos/seed/cute-dog/600/600',
+          'happy-cat': 'https://picsum.photos/seed/happy-cat/600/600',
+          'silly-monkey': 'https://picsum.photos/seed/silly-monkey/600/600',
+          'crazy-eyes': 'https://picsum.photos/seed/crazy-eyes/600/600',
+          'big-smile': 'https://picsum.photos/seed/big-smile/600/600',
+          'wink-face': 'https://picsum.photos/seed/wink-face/600/600',
+          'cool-guy': 'https://picsum.photos/seed/cool-guy/600/600',
+          'party-time': 'https://picsum.photos/seed/party-time/600/600',
+          'dance-moves': 'https://picsum.photos/seed/dance-moves/600/600',
+          'lol-moment': 'https://picsum.photos/seed/lol-moment/600/600',
+          'omg-reaction': 'https://picsum.photos/seed/omg-reaction/600/600',
+          'epic-fail': 'https://picsum.photos/seed/epic-fail/600/600',
+          'win-moment': 'https://picsum.photos/seed/win-moment/600/600',
+          'lost-in-thought': 'https://picsum.photos/seed/lost-thought/600/600',
+          'confused-puppy': 'https://picsum.photos/seed/confused-puppy/600/600',
+          'sleepy-cat': 'https://picsum.photos/seed/sleepy-cat/600/600',
+          'playful-bunny': 'https://picsum.photos/seed/playful-bunny/600/600',
+          'excited-bird': 'https://picsum.photos/seed/excited-bird/600/600',
+          'grumpy-cat': 'https://picsum.photos/seed/grumpy-cat/600/600',
+          'silly-duck': 'https://picsum.photos/seed/silly-duck/600/600',
+          'happy-panda': 'https://picsum.photos/seed/happy-panda/600/600',
+          'crazy-frog': 'https://picsum.photos/seed/crazy-frog/600/600',
+          'funny-bear': 'https://picsum.photos/seed/funny-bear/600/600',
+          'chill-vibes': 'https://picsum.photos/seed/chill-vibes/600/600',
+          'party-animal': 'https://picsum.photos/seed/party-animal/600/600',
+          'mood-swing': 'https://picsum.photos/seed/mood-swing/600/600',
+          'dramatic-gasp': 'https://picsum.photos/seed/dramatic-gasp/600/600',
+          'mind-blown': 'https://picsum.photos/seed/mind-blown/600/600',
+          'face-explode': 'https://picsum.photos/seed/face-explode/600/600',
+          'crazy-laugh': 'https://picsum.photos/seed/crazy-laugh/600/600',
+          'shocked-face': 'https://picsum.photos/seed/shocked-face/600/600',
+          'tears-of-joy': 'https://picsum.photos/seed/tears-joy/600/600',
+          'rolling-eyes': 'https://picsum.photos/seed/rolling-eyes/600/600',
+          'side-eye': 'https://picsum.photos/seed/side-eye/600/600',
+          'smirk-face': 'https://picsum.photos/seed/smirk-face/600/600',
+          'yawning-cat': 'https://picsum.photos/seed/yawning-cat/600/600',
+          'peeking-duck': 'https://picsum.photos/seed/peeking-duck/600/600',
+          'silly-goat': 'https://picsum.photos/seed/silly-goat/600/600',
+          'confused-koala': 'https://picsum.photos/seed/confused-koala/600/600',
+          'playful-fox': 'https://picsum.photos/seed/playful-fox/600/600',
+          'happy-hamster': 'https://picsum.photos/seed/happy-hamster/600/600',
+          'sleepy-bear': 'https://picsum.photos/seed/sleepy-bear/600/600',
+          'excited-rabbit': 'https://picsum.photos/seed/excited-rabbit/600/600',
+          'curious-owl': 'https://picsum.photos/seed/curious-owl/600/600',
+          'silly-penguin': 'https://picsum.photos/seed/silly-penguin/600/600',
+          'happy-turtle': 'https://picsum.photos/seed/happy-turtle/600/600',
+          'playful-dolphin': 'https://picsum.photos/seed/playful-dolphin/600/600',
+          'crazy-parrot': 'https://picsum.photos/seed/crazy-parrot/600/600',
+          'chicken-surprise': 'https://picsum.photos/seed/chicken-surprise/600/600',
+          'cow-meme': 'https://picsum.photos/seed/cow-meme/600/600',
+          'pig-funny': 'https://picsum.photos/seed/pig-funny/600/600',
+          'sheep-confused': 'https://picsum.photos/seed/sheep-confused/600/600',
+          'horse-awkward': 'https://picsum.photos/seed/horse-awkward/600/600'
+        };
+        
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          this.currentImage = img;
+          this.drawImage();
+        };
+        img.src = templateUrls[templateName] || templateUrls['drake'];
+      }
+      
+      loadDefaultImage() {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          this.currentImage = img;
+          this.drawImage();
+        };
+        img.src = 'https://picsum.photos/seed/default-meme/600/600';
+      }
+      
+      drawImage() {
+        if (!this.currentImage) return;
+        
+        // Clear canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Draw image to fit canvas
+        const scale = Math.min(this.canvas.width / this.currentImage.width, 
+                              this.canvas.height / this.currentImage.height);
+        const width = this.currentImage.width * scale;
+        const height = this.currentImage.height * scale;
+        const x = (this.canvas.width - width) / 2;
+        const y = (this.canvas.height - height) / 2;
+        
+        this.ctx.drawImage(this.currentImage, x, y, width, height);
+      }
+      
+      addCustomText() {
+        const text = prompt('Enter custom text:');
+        if (text) {
+          const textElement = document.createElement('div');
+          textElement.className = 'meme-text custom';
+          textElement.textContent = text;
+          textElement.contentEditable = true;
+          textElement.style.fontSize = this.fontSize + 'px';
+          textElement.style.fontFamily = this.currentFont;
+          textElement.style.color = this.textColor;
+          
+          document.getElementById('canvasContainer').appendChild(textElement);
+          this.makeTextDraggable(textElement);
+          this.customTexts.push(textElement);
+        }
+      }
+      
+      updateTextStyle() {
+        const textElements = document.querySelectorAll('.meme-text');
+        textElements.forEach(element => {
+          element.style.fontSize = this.fontSize + 'px';
+          element.style.fontFamily = this.currentFont;
+          element.style.color = this.textColor;
+          element.style.webkitTextStroke = `${this.strokeWidth}px ${this.strokeColor}`;
+          element.style.textShadow = `${this.strokeWidth}px ${this.strokeWidth}px 0 ${this.strokeColor}, 
+                                    -${this.strokeWidth}px -${this.strokeWidth}px 0 ${this.strokeColor}, 
+                                    ${this.strokeWidth}px -${this.strokeWidth}px 0 ${this.strokeColor}, 
+                                    -${this.strokeWidth}px ${this.strokeWidth}px 0 ${this.strokeColor}`;
+        });
+      }
+      
+      makeTextDraggable(element) {
+        let isDragging = false;
+        let startX, startY, initialX, initialY;
+        
+        element.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          startX = e.clientX;
+          startY = e.clientY;
+          initialX = element.offsetLeft;
+          initialY = element.offsetTop;
+          element.style.cursor = 'grabbing';
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          
+          element.style.left = (initialX + dx) + 'px';
+          element.style.top = (initialY + dy) + 'px';
+          element.style.transform = 'none';
+        });
+        
+        document.addEventListener('mouseup', () => {
+          isDragging = false;
+          element.style.cursor = 'move';
+        });
+      }
+      
+      downloadMeme() {
+        // Create a temporary canvas for the final meme
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = this.canvas.width;
+        tempCanvas.height = this.canvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        
+        // Draw the image
+        tempCtx.drawImage(this.canvas, 0, 0);
+        
+        // Draw text elements
+        const container = document.getElementById('canvasContainer');
+        const textElements = container.querySelectorAll('.meme-text');
+        
+        textElements.forEach(element => {
+          const rect = element.getBoundingClientRect();
+          const canvasRect = this.canvas.getBoundingClientRect();
+          
+          const x = rect.left - canvasRect.left + rect.width / 2;
+          const y = rect.top - canvasRect.top + rect.height / 2;
+          
+          tempCtx.font = `bold ${this.fontSize}px ${this.currentFont}`;
+          tempCtx.fillStyle = this.textColor;
+          tempCtx.strokeStyle = this.strokeColor;
+          tempCtx.lineWidth = this.strokeWidth;
+          tempCtx.textAlign = 'center';
+          tempCtx.textBaseline = 'middle';
+          tempCtx.strokeText(element.textContent, x, y);
+          tempCtx.fillText(element.textContent, x, y);
+        });
+        
+        // Download
+        const link = document.createElement('a');
+        link.download = 'meme_' + Date.now() + '.png';
+        link.href = tempCanvas.toDataURL();
+        link.click();
+      }
+      
+      resetText() {
+        document.getElementById('topTextInput').value = 'TOP TEXT';
+        document.getElementById('bottomTextInput').value = 'BOTTOM TEXT';
+        document.getElementById('topText').textContent = 'TOP TEXT';
+        document.getElementById('bottomText').textContent = 'BOTTOM TEXT';
+        
+        // Reset positions
+        document.getElementById('topText').style.top = '10px';
+        document.getElementById('topText').style.left = '0';
+        document.getElementById('topText').style.transform = 'none';
+        
+        document.getElementById('bottomText').style.bottom = '10px';
+        document.getElementById('bottomText').style.left = '0';
+        document.getElementById('bottomText').style.transform = 'none';
+        
+        // Remove custom texts
+        this.customTexts.forEach(text => text.remove());
+        this.customTexts = [];
+      }
+      
+      hideUploadSection() {
+        const uploadSection = document.getElementById('uploadSection');
+        if (uploadSection) {
+          uploadSection.style.display = 'none';
+        }
+      }
+      
+      showUploadSection() {
+        const uploadSection = document.getElementById('uploadSection');
+        if (uploadSection) {
+          uploadSection.style.display = 'block';
+        }
+      }
+      
+      clearAll() {
+        if (confirm('Are you sure you want to clear everything?')) {
+          this.resetText();
+          this.loadDefaultImage();
+          this.showUploadSection();
+          document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+        }
+      }
+    }
+    
+    // Initialize meme generator when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      new MemeGenerator();
+    });
+  </script>
+</body>
+
+</html>
