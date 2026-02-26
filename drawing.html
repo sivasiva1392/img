@@ -470,14 +470,16 @@
       startDrawing(e) {
         this.isDrawing = true;
         const rect = this.canvas.getBoundingClientRect();
-        this.startX = e.clientX - rect.left;
-        this.startY = e.clientY - rect.top;
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+        this.startX = (e.clientX - rect.left) * scaleX;
+        this.startY = (e.clientY - rect.top) * scaleY;
         
         if (this.currentTool === 'text') {
           this.addText(this.startX, this.startY);
           this.isDrawing = false;
         } else if (this.currentTool === 'fill') {
-          this.fillArea(this.startX, this.startY);
+          this.fillArea(Math.floor(this.startX), Math.floor(this.startY));
           this.isDrawing = false;
           this.saveState();
         }
@@ -487,8 +489,10 @@
         if (!this.isDrawing) return;
         
         const rect = this.canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+        const x = (e.clientX - rect.left) * scaleX;
+        const y = (e.clientY - rect.top) * scaleY;
         
         this.ctx.lineWidth = this.brushSize;
         
@@ -522,8 +526,10 @@
         
         if (this.currentTool === 'line' || this.currentTool === 'rectangle' || this.currentTool === 'circle') {
           const rect = this.canvas.getBoundingClientRect();
-          const endX = e.clientX - rect.left;
-          const endY = e.clientY - rect.top;
+          const scaleX = this.canvas.width / rect.width;
+          const scaleY = this.canvas.height / rect.height;
+          const endX = (e.clientX - rect.left) * scaleX;
+          const endY = (e.clientY - rect.top) * scaleY;
           
           this.ctx.globalCompositeOperation = 'source-over';
           this.ctx.strokeStyle = this.currentColor;
