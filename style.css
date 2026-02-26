@@ -473,4 +473,24 @@ body {
   padding-top: 1rem;
 }
 
+/* Mobile Menu Styles */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 0.5rem;
+  }
+  
+  .navbar-nav {
+    text-align: center;
+  }
+  
+  .navbar-nav .nav-link {
+    margin: 0.25rem 0;
+    display: inline-block;
+  }
+}
+
 /* SEO and Feature Cards */
