@@ -28,6 +28,24 @@
   const rotateLeftBtn = document.getElementById('rotateLeftBtn');
   const rotateRightBtn = document.getElementById('rotateRightBtn');
 
+  // Color Control Elements
+  const redRange = document.getElementById('redRange');
+  const redValue = document.getElementById('redValue');
+  const greenRange = document.getElementById('greenRange');
+  const greenValue = document.getElementById('greenValue');
+  const blueRange = document.getElementById('blueRange');
+  const blueValue = document.getElementById('blueValue');
+
+  // Reflection Elements
+  const reflectionType = document.getElementById('reflectionType');
+  const reflectionIntensity = document.getElementById('reflectionIntensity');
+  const reflectionValue = document.getElementById('reflectionValue');
+
+  // Background Removal Elements
+  const bgRemovalMethod = document.getElementById('bgRemovalMethod');
+  const bgTolerance = document.getElementById('bgTolerance');
+  const bgToleranceValue = document.getElementById('bgToleranceValue');
+
   // Toggle Header Elements
   const toggleHeaderBtn = document.getElementById('toggleHeaderBtn');
   const toggleIcon = document.getElementById('toggleIcon');
@@ -60,6 +78,19 @@
     rotateRightBtn.disabled = !enabled;
     downloadBtn.disabled = !enabled;
     resetBtn.disabled = !enabled;
+    
+    // Enable/disable color controls
+    redRange.disabled = !enabled;
+    greenRange.disabled = !enabled;
+    blueRange.disabled = !enabled;
+    
+    // Enable/disable reflection controls
+    reflectionType.disabled = !enabled;
+    reflectionIntensity.disabled = !enabled;
+    
+    // Enable/disable background removal controls
+    bgRemovalMethod.disabled = !enabled;
+    bgTolerance.disabled = !enabled;
   }
 
   function resetControls() {
@@ -77,6 +108,24 @@
 
     contrastRange.value = '0';
     contrastValue.textContent = '0';
+    
+    // Reset color controls
+    redRange.value = '0';
+    redValue.textContent = '0';
+    greenRange.value = '0';
+    greenValue.textContent = '0';
+    blueRange.value = '0';
+    blueValue.textContent = '0';
+    
+    // Reset reflection controls
+    reflectionType.value = 'none';
+    reflectionIntensity.value = '50';
+    reflectionValue.textContent = '50';
+    
+    // Reset background removal controls
+    bgRemovalMethod.value = 'none';
+    bgTolerance.value = '30';
+    bgToleranceValue.textContent = '30';
 
     updateControlVisibility();
   }
@@ -534,6 +583,143 @@
     }
     return imageData;
   }
+
+  // Reflection effect functions
+  function applyReflection(imageData, type, intensity) {
+    if (type === 'none') return imageData;
+    
+    const d = imageData.data;
+    const { width, height } = imageData;
+    const intensityFactor = intensity / 100;
+    
+    // Create reflection data
+    const reflectionData = new Uint8ClampedArray(d.length);
+    
+    // Copy original image data
+    for (let i = 0; i < d.length; i += 4) {
+      reflectionData[i] = d[i];
+      reflectionData[i + 1] = d[i + 1];
+      reflectionData[i + 2] = d[i + 2];
+      reflectionData[i + 3] = d[i + 3];
+    }
+    
+    // Apply reflection based on type
+    switch(type) {
+      case 'water':
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const idx = (y * width + x) * 4;
+            const reflectionY = height - 1 - y;
+            const reflectionIdx = (reflectionY * width + x) * 4;
+            
+            // Water ripple effect
+            const wave = Math.sin((x + y) * 0.1) * 5;
+            const opacity = Math.max(0, 0.3 - (y / height) * 0.3) * intensityFactor;
+            
+            // Blend reflection with original
+            if (reflectionIdx >= 0 && reflectionIdx < d.length) {
+              d[reflectionIdx] = clampByte(d[reflectionIdx] * (0.7 + wave * 0.1));
+              d[reflectionIdx + 1] = clampByte(d[reflectionIdx + 1] * (0.8 + wave * 0.05));
+              d[reflectionIdx + 2] = clampByte(d[reflectionIdx + 2] * (0.9 + wave * 0.02));
+              d[reflectionIdx + 3] = clampByte(255 * opacity);
+            }
+          }
+        }
+        break;
+        
+      case 'mirror':
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const idx = (y * width + x) * 4;
+            const reflectionY = height - 1 - y;
+            const reflectionIdx = (reflectionY * width + x) * 4;
+            
+            // Mirror reflection with gradient fade
+            const fadeAmount = (y / height) * intensityFactor;
+            
+            if (reflectionIdx >= 0 && reflectionIdx < d.length) {
+              d[reflectionIdx] = clampByte(d[reflectionIdx] * (1 - fadeAmount * 0.3));
+              d[reflectionIdx + 1] = clampByte(d[reflectionIdx + 1] * (1 - fadeAmount * 0.2));
+              d[reflectionIdx + 2] = clampByte(d[reflectionIdx + 2] * (1 - fadeAmount * 0.1));
+              d[reflectionIdx + 3] = clampByte(255 * (1 - fadeAmount * 0.5));
+            }
+          }
+        }
+        break;
+        
+      case 'glass':
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const idx = (y * width + x) * 4;
+            const reflectionY = height - 1 - y;
+            const reflectionIdx = (reflectionY * width + x) * 4;
+            
+            // Glass reflection with blur and distortion
+            const distortion = Math.sin((x * 0.05) + (y * 0.02)) * 10;
+            const blurAmount = Math.abs(distortion) * intensityFactor * 0.5;
+            
+            if (reflectionIdx >= 0 && reflectionIdx < d.length) {
+              const sourceX = Math.max(0, Math.min(width - 1, x + distortion));
+              const sourceIdx = (reflectionY * width + sourceX) * 4;
+              
+              if (sourceIdx >= 0 && sourceIdx < d.length) {
+                d[reflectionIdx] = clampByte(d[sourceIdx] * 0.8);
+                d[reflectionIdx + 1] = clampByte(d[sourceIdx + 1] * 0.85);
+                d[reflectionIdx + 2] = clampByte(d[sourceIdx + 2] * 0.9);
+                d[reflectionIdx + 3] = clampByte(200 * intensityFactor);
+              }
+            }
+          }
+        }
+        break;
+        
+      case 'metal':
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const idx = (y * width + x) * 4;
+            const reflectionY = height - 1 - y;
+            const reflectionIdx = (reflectionY * width + x) * 4;
+            
+            // Metal reflection with high contrast
+            const metallic = (x + y) % 20 < 10 ? 1.3 : 0.7;
+            const fadeAmount = (y / height) * intensityFactor;
+            
+            if (reflectionIdx >= 0 && reflectionIdx < d.length) {
+              d[reflectionIdx] = clampByte(d[reflectionIdx] * metallic * (1 - fadeAmount * 0.4));
+              d[reflectionIdx + 1] = clampByte(d[reflectionIdx + 1] * metallic * (1 - fadeAmount * 0.3));
+              d[reflectionIdx + 2] = clampByte(d[reflectionIdx + 2] * metallic * (1 - fadeAmount * 0.2));
+              d[reflectionIdx + 3] = clampByte(255 * (1 - fadeAmount * 0.7));
+            }
+          }
+        }
+        break;
+        
+      case 'marble':
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const idx = (y * width + x) * 4;
+            const reflectionY = height - 1 - y;
+            const reflectionIdx = (reflectionY * width + x) * 4;
+            
+            // Marble reflection with texture
+            const texture = Math.sin((x * 0.1) + (y * 0.05)) * 20;
+            const veining = (x + y) % 30 < 15 ? 0.8 : 1.0;
+            const fadeAmount = (y / height) * intensityFactor;
+            
+            if (reflectionIdx >= 0 && reflectionIdx < d.length) {
+              d[reflectionIdx] = clampByte(d[reflectionIdx] * veining * (1 - fadeAmount * 0.3));
+              d[reflectionIdx + 1] = clampByte(d[reflectionIdx + 1] * veining * (1 - fadeAmount * 0.2));
+              d[reflectionIdx + 2] = clampByte(d[reflectionIdx + 2] * veining * (1 - fadeAmount * 0.1));
+              d[reflectionIdx + 3] = clampByte(220 * intensityFactor);
+            }
+          }
+        }
+        break;
+    }
+    
+    return imageData;
+  }
+
     function boxBlur(imageData, radius) {
     const r = Math.max(0, Math.min(20, Number(radius) || 0));
     if (r === 0) return imageData;
@@ -740,6 +926,118 @@
         }
       }
     }
+    return imageData;
+  }
+
+  function applyRGBAdjustment(imageData, redAdjust, greenAdjust, blueAdjust) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      d[i] = clampByte(d[i] + redAdjust);     // Red
+      d[i + 1] = clampByte(d[i + 1] + greenAdjust); // Green
+      d[i + 2] = clampByte(d[i + 2] + blueAdjust);  // Blue
+    }
+    return imageData;
+  }
+
+  function applyBackgroundRemoval(imageData, method, tolerance) {
+    if (method === 'none') return imageData;
+    
+    const d = imageData.data;
+    const { width, height } = imageData;
+    const toleranceFactor = tolerance / 100;
+    
+    switch(method) {
+      case 'magic':
+        // Magic eraser - detect background by color similarity
+        const bgColor = { r: d[0], g: d[1], b: d[2] }; // Assume top-left pixel is background
+        
+        for (let i = 0; i < d.length; i += 4) {
+          const r = d[i];
+          const g = d[i + 1];
+          const b = d[i + 2];
+          
+          // Calculate color distance from background
+          const distance = Math.sqrt(
+            Math.pow(r - bgColor.r, 2) + 
+            Math.pow(g - bgColor.g, 2) + 
+            Math.pow(b - bgColor.b, 2)
+          );
+          
+          // If pixel is similar to background, make it transparent
+          if (distance < toleranceFactor * 100) {
+            d[i + 3] = 0; // Set alpha to 0 (transparent)
+          }
+        }
+        break;
+        
+      case 'color':
+        // Color-based removal - remove pixels with low saturation
+        for (let i = 0; i < d.length; i += 4) {
+          const r = d[i] / 255;
+          const g = d[i + 1] / 255;
+          const b = d[i + 2] / 255;
+          
+          // Convert to HSL and check saturation
+          const max = Math.max(r, g, b);
+          const min = Math.min(r, g, b);
+          const saturation = max === 0 ? 0 : (max - min) / max;
+          
+          // If saturation is low, make transparent
+          if (saturation < toleranceFactor * 0.3) {
+            d[i + 3] = 0;
+          }
+        }
+        break;
+        
+      case 'edge':
+        // Edge detection - keep only high-contrast edges
+        const edgeData = new Uint8ClampedArray(d.length);
+        
+        // Copy original data
+        for (let i = 0; i < d.length; i++) {
+          edgeData[i] = d[i];
+        }
+        
+        // Apply edge detection
+        for (let y = 1; y < height - 1; y++) {
+          for (let x = 1; x < width - 1; x++) {
+            const idx = (y * width + x) * 4;
+            
+            // Calculate gradient magnitude
+            let gx = 0, gy = 0;
+            
+            // Sobel operator X
+            gx += -1 * d[((y - 1) * width + (x - 1)) * 4];
+            gx += 1 * d[((y - 1) * width + (x + 1)) * 4];
+            gx += -2 * d[(y * width + (x - 1)) * 4];
+            gx += 2 * d[(y * width + (x + 1)) * 4];
+            gx += -1 * d[((y + 1) * width + (x - 1)) * 4];
+            gx += 1 * d[((y + 1) * width + (x + 1)) * 4];
+            
+            // Sobel operator Y
+            gy += -1 * d[((y - 1) * width + (x - 1)) * 4];
+            gy += -2 * d[((y - 1) * width + x) * 4];
+            gy += -1 * d[((y - 1) * width + (x + 1)) * 4];
+            gy += 1 * d[((y + 1) * width + (x - 1)) * 4];
+            gy += 2 * d[((y + 1) * width + x) * 4];
+            gy += 1 * d[((y + 1) * width + (x + 1)) * 4];
+            
+            const magnitude = Math.sqrt(gx * gx + gy * gy);
+            
+            // Keep only strong edges
+            if (magnitude < toleranceFactor * 50) {
+              edgeData[idx + 3] = 0; // Make transparent
+            }
+          }
+        }
+        
+        // Copy edge data back
+        for (let i = 0; i < d.length; i++) {
+          d[i] = edgeData[i];
+        }
+        break;
+    }
+    
     return imageData;
   }
 
@@ -996,6 +1294,30 @@
       img = applyWatercolor(img);
     }
 
+    // Apply color adjustments
+    const redAdjust = Number(redRange.value);
+    const greenAdjust = Number(greenRange.value);
+    const blueAdjust = Number(blueRange.value);
+    
+    if (redAdjust !== 0 || greenAdjust !== 0 || blueAdjust !== 0) {
+      img = applyRGBAdjustment(img, redAdjust, greenAdjust, blueAdjust);
+    }
+
+    // Apply background removal
+    const bgRemovalMethodValue = bgRemovalMethod.value;
+    const bgToleranceValue = Number(bgTolerance.value);
+    if (bgRemovalMethodValue !== 'none') {
+      img = applyBackgroundRemoval(img, bgRemovalMethodValue, bgToleranceValue);
+    }
+
+
+    // Apply reflection effect
+    const reflectionTypeValue = reflectionType.value;
+    const reflectionIntensityValue = Number(reflectionIntensity.value);
+    if (reflectionTypeValue !== 'none') {
+      img = applyReflection(img, reflectionTypeValue, reflectionIntensityValue);
+    }
+
     // Apply shape
     if (shape === 'circle') {
       img = applyCircle(img);
@@ -1176,6 +1498,42 @@
 
   contrastRange.addEventListener('input', () => {
     contrastValue.textContent = contrastRange.value;
+    render();
+  });
+
+  // Color control event listeners
+  redRange.addEventListener('input', () => {
+    redValue.textContent = redRange.value;
+    render();
+  });
+
+  greenRange.addEventListener('input', () => {
+    greenValue.textContent = greenRange.value;
+    render();
+  });
+
+  blueRange.addEventListener('input', () => {
+    blueValue.textContent = blueRange.value;
+    render();
+  });
+
+
+  reflectionIntensity.addEventListener('input', () => {
+    reflectionValue.textContent = reflectionIntensity.value;
+    render();
+  });
+
+  reflectionType.addEventListener('change', () => {
+    render();
+  });
+
+  // Background removal event listeners
+  bgTolerance.addEventListener('input', () => {
+    bgToleranceValue.textContent = bgTolerance.value;
+    render();
+  });
+
+  bgRemovalMethod.addEventListener('change', () => {
     render();
   });
 
@@ -1488,6 +1846,75 @@
           <li><strong>Range:</strong> -100 (flat) to +100 (high contrast)</li>
         </ul>
         <p><strong>Ideal for:</strong> Making photos pop, fixing flat images, creating dramatic effects</p>
+      `
+    },
+    color: {
+      title: '🎨 RGB Color Adjustment',
+      content: `
+        <h6>Professional Color Correction</h6>
+        <p>Fine-tune your image colors with <strong>individual RGB channel control</strong> for perfect color balance.</p>
+        <h6>Color Channels:</h6>
+        <ul>
+          <li><strong>Red Channel:</strong> Adjust red tones (-100 to +100)</li>
+          <li><strong>Green Channel:</strong> Adjust green tones (-100 to +100)</li>
+          <li><strong>Blue Channel:</strong> Adjust blue tones (-100 to +100)</li>
+        </ul>
+        <h6>Use Cases:</h6>
+        <ul>
+          <li>Color cast correction</li>
+          <li>White balance adjustment</li>
+          <li>Creative color grading</li>
+          <li>Photo enhancement</li>
+        </ul>
+        <p><strong>Perfect for:</strong> Professional photo editing, color correction, creative effects</p>
+      `
+    },
+    reflection: {
+      title: '🪞 Reflection Effects',
+      content: `
+        <h6>Realistic Reflection Effects</h6>
+        <p>Add <strong>5 professional reflection types</strong> with adjustable intensity for stunning visual effects.</p>
+        <h6>Reflection Types:</h6>
+        <ul>
+          <li><strong>Water Reflection:</strong> Rippling water effect with wave distortion</li>
+          <li><strong>Mirror Reflection:</strong> Perfect mirror image with gradient fade</li>
+          <li><strong>Glass Reflection:</strong> Distorted glass effect with blur</li>
+          <li><strong>Metal Reflection:</strong> High contrast metallic sheen</li>
+          <li><strong>Marble Reflection:</strong> Textured marble with veining patterns</li>
+        </ul>
+        <h6>Intensity Control:</h6>
+        <ul>
+          <li><strong>0-50:</strong> Subtle reflection effect</li>
+          <li><strong>51-100:</strong> Strong, prominent reflection</li>
+        </ul>
+        <p><strong>Great for:</strong> Product photography, artistic effects, creative designs</p>
+      `
+    },
+    background: {
+      title: '🖼️ AI Background Removal',
+      content: `
+        <h6>Professional Background Removal</h6>
+        <p>Remove backgrounds with <strong>3 advanced AI-powered methods</strong> for perfect transparent images.</p>
+        <h6>Removal Methods:</h6>
+        <ul>
+          <li><strong>Magic Eraser:</strong> Automatically detects and removes background colors</li>
+          <li><strong>Color Based:</strong> Removes low-saturation areas for clean cutouts</li>
+          <li><strong>Edge Detection:</strong> Uses Sobel edge detection for precise object outlines</li>
+        </ul>
+        <h6>Tolerance Control:</h6>
+        <ul>
+          <li><strong>0-30:</strong> Precise removal (less tolerance)</li>
+          <li><strong>31-70:</strong> Balanced removal (moderate tolerance)</li>
+          <li><strong>71-100:</strong> Aggressive removal (more tolerance)</li>
+        </ul>
+        <h6>Use Cases:</h6>
+        <ul>
+          <li>Product photography backgrounds</li>
+          <li>Profile picture optimization</li>
+          <li>Graphic design assets</li>
+          <li>E-commerce product images</li>
+        </ul>
+        <p><strong>Perfect for:</strong> Creating transparent PNGs, product photos, social media content</p>
       `
     }
   };

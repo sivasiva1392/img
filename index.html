@@ -8,8 +8,8 @@
   
   <!-- SEO Meta Tags -->
   <title>Pixify Now | Free Online Image Filters & Photo Editor - Apply Professional Effects</title>
-  <meta name="description" content="Free online image editor with 20+ professional filters. Apply vintage, black & white, blur, brightness effects. Transform images, add shapes, rotate, flip. No download required." />
-  <meta name="keywords" content="image filters, photo editor, online photo editor, free image editor, image effects, photo filters, vintage filter, black and white, blur image, brightness adjust, contrast, image tools, photo editing online, image transform" />
+  <meta name="description" content="Free online image editor with 20+ professional filters, RGB color adjustment, reflection effects, and AI background removal. Apply vintage, black & white, blur, brightness effects. Transform images, add shapes, rotate, flip. Remove backgrounds instantly. No download required." />
+  <meta name="keywords" content="image filters, photo editor, online photo editor, free image editor, image effects, photo filters, vintage filter, black and white, blur image, brightness adjust, contrast, image tools, photo editing online, image transform, RGB color adjustment, color correction, reflection effects, water reflection, mirror reflection, glass reflection, metal reflection, marble reflection, color channels, red green blue adjustment, photo enhancement, background removal, AI background removal, magic eraser, remove background, transparent background, background eraser, cutout tool" />
   <meta name="author" content="Image Filters App" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="language" content="English" />
@@ -17,7 +17,7 @@
   
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Free Online Image Filters & Photo Editor" />
-  <meta property="og:description" content="Apply professional filters to your images online. Transform photos, add effects, and edit images for free." />
+  <meta property="og:description" content="Apply professional filters, RGB color adjustment, reflection effects, and AI background removal to your images online. Transform photos, add effects, remove backgrounds, and edit images for free." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pixifynow.com/" />
   <meta property="og:site_name" content="PixifyNow" />
@@ -29,7 +29,7 @@
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Online Image Filters & Photo Editor" />
-  <meta name="twitter:description" content="Apply professional filters to your images online. Transform photos, add effects, and edit images for free." />
+  <meta name="twitter:description" content="Apply professional filters, RGB color adjustment, reflection effects, and AI background removal to your images online. Transform photos, add effects, remove backgrounds, and edit images for free." />
   <meta name="twitter:image" content="https://pixifynow.com/twitter-image.jpg" />
   <meta name="twitter:creator" content="@pixifynow" />
   
@@ -59,13 +59,52 @@
 
     gtag('config', 'G-LYLE643DLW');
   </script>
+  
+  <!-- Code Protection -->
+  <script>
+    // Disable right click
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    // Disable text selection
+    document.addEventListener('selectstart', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    // Disable drag
+    document.addEventListener('dragstart', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.addEventListener('keydown', function(e) {
+      if (e.keyCode === 123 || 
+          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
+          (e.ctrlKey && e.keyCode === 85)) {
+        e.preventDefault();
+        return false;
+      }
+    });
+    
+    // Check for dev tools
+    setInterval(function() {
+      if (window.outerHeight - window.innerHeight > 200 || 
+          window.outerWidth - window.innerWidth > 200) {
+        window.location.reload();
+      }
+    }, 1000);
+  </script>
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "PixifyNow - Free Online Photo Editor",
-    "description": "Free online image editor with professional filters, image transformation, and photo editing tools",
+    "description": "Free online image editor with professional filters, RGB color adjustment, reflection effects, AI background removal, image transformation, and photo editing tools",
     "url": "https://pixifynow.com/",
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "Any",
@@ -76,6 +115,18 @@
     },
     "featureList": [
       "Image Filters",
+      "RGB Color Adjustment",
+      "Color Correction",
+      "Reflection Effects",
+      "AI Background Removal",
+      "Magic Eraser",
+      "Transparent Background",
+      "Background Eraser",
+      "Water Reflection",
+      "Mirror Reflection",
+      "Glass Reflection",
+      "Metal Reflection",
+      "Marble Reflection",
       "Image Transformation",
       "Image Rotation",
       "Image Flipping",
@@ -108,10 +159,13 @@
     
   <main class="app container py-4">
     <header class="app__header text-center mb-3" id="appHeader">
-      <h1 class="app__title mb-1">Free Online Image Filters & Photo Editor</h1>
-      <p class="app__subtitle mb-0">Upload an image, apply professional filters, transform your photos, and download your edited images instantly. No registration required.</p>
+      <h1 class="app__title mb-1">Free Online Image Filters, Color Adjustment & Background Removal</h1>
+      <p class="app__subtitle mb-0">Upload an image, apply professional filters, adjust RGB colors, remove backgrounds with AI, add reflection effects, transform your photos, and download your edited images instantly. No registration required.</p>
       <div class="app__description mt-3">
         <p class="text-muted">🎨 <strong>20+ Professional Filters:</strong> Vintage, Black & White, Blur, Brightness, Contrast & More</p>
+        <p class="text-muted">🎨 <strong>RGB Color Adjustment:</strong> Fine-tune Red, Green, Blue channels for perfect color correction</p>
+        <p class="text-muted">🖼️ <strong>AI Background Removal:</strong> Magic eraser, color-based, and edge detection methods</p>
+        <p class="text-muted">🪞 <strong>5 Reflection Effects:</strong> Water, Mirror, Glass, Metal, Marble reflections</p>
         <p class="text-muted">🚀 <strong>Instant Editing:</strong> Real-time preview with no software download needed</p>
         <p class="text-muted">💎 <strong>Free Forever:</strong> No watermarks, no registration, completely free</p>
       </div>
@@ -133,13 +187,31 @@
         </div>
         <div class="col-md-3 col-6 mb-3">
           <div class="feature-card">
-            <h3>� Shape Masks</h3>
+            <h3>🎨 Color Adjustment</h3>
+            <p>Fine-tune RGB color channels for perfect color correction</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-3">
+          <div class="feature-card">
+            <h3>🖼️ Background Removal</h3>
+            <p>AI-powered magic eraser and transparent background creation</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-3">
+          <div class="feature-card">
+            <h3>🪞 Reflection Effects</h3>
+            <p>Add water, mirror, glass, metal, and marble reflections</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-3">
+          <div class="feature-card">
+            <h3>✂️ Shape Masks</h3>
             <p>Crop into circles, hearts, stars, and more shapes</p>
           </div>
         </div>
         <div class="col-md-3 col-6 mb-3">
           <div class="feature-card">
-            <h3>� Format Options</h3>
+            <h3>💾 Format Options</h3>
             <p>Save as PNG, JPEG, WebP, or BMP formats</p>
           </div>
         </div>
@@ -161,6 +233,73 @@
                 <input id="fileInput" class="form-control" type="file" accept="image/png,image/jpeg,image/jpg" aria-describedby="fileHelp" />
                 <small id="fileHelp" class="form-text text-muted">Maximum file size: 10MB. Supported formats: PNG, JPG, JPEG</small>
               </div>
+
+              <div class="control col-12">
+                <label class="label form-label">🪞 Reflection Effect</label>
+                <div class="row g-2">
+                  <div class="col-6">
+                    <label class="form-label small">Reflection Type</label>
+                    <select id="reflectionType" class="form-select" disabled>
+                      <option value="none">No Reflection</option>
+                      <option value="water">💧 Water Reflection</option>
+                      <option value="mirror">🪞 Mirror Reflection</option>
+                      <option value="glass">🔍 Glass Reflection</option>
+                      <option value="metal">⚡ Metal Reflection</option>
+                      <option value="marble">🗿 Marble Reflection</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label small">Intensity</label>
+                    <input type="range" id="reflectionIntensity" class="form-range" min="0" max="100" value="50" disabled />
+                    <output id="reflectionValue" class="value small">50</output>
+                  </div>
+                </div>
+                <small class="form-text text-muted">Add realistic reflection effects to your images</small>
+              </div>
+
+              <div class="control col-12">
+                <label class="label form-label">🎨 Color Adjustment</label>
+                <div class="row g-2">
+                  <div class="col-4">
+                    <label class="form-label small">Red</label>
+                    <input type="range" id="redRange" class="form-range" min="-100" max="100" value="0" disabled />
+                    <output id="redValue" class="value small">0</output>
+                  </div>
+                  <div class="col-4">
+                    <label class="form-label small">Green</label>
+                    <input type="range" id="greenRange" class="form-range" min="-100" max="100" value="0" disabled />
+                    <output id="greenValue" class="value small">0</output>
+                  </div>
+                  <div class="col-4">
+                    <label class="form-label small">Blue</label>
+                    <input type="range" id="blueRange" class="form-range" min="-100" max="100" value="0" disabled />
+                    <output id="blueValue" class="value small">0</output>
+                  </div>
+                </div>
+                <small class="form-text text-muted">Adjust RGB color channels for custom color effects</small>
+              </div>
+
+              <div class="control col-12">
+                <label class="label form-label">🖼️ Background Removal</label>
+                <div class="row g-2">
+                  <div class="col-6">
+                    <label class="form-label small">Removal Method</label>
+                    <select id="bgRemovalMethod" class="form-select" disabled>
+                      <option value="none">No Removal</option>
+                      <option value="magic">✨ Magic Eraser</option>
+                      <option value="color">🎨 Color Based</option>
+                      <option value="edge">📐 Edge Detection</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label small">Tolerance</label>
+                    <input type="range" id="bgTolerance" class="form-range" min="0" max="100" value="30" disabled />
+                    <output id="bgToleranceValue" class="value small">30</output>
+                  </div>
+                </div>
+                <small class="form-text text-muted">Remove background with AI-powered detection</small>
+              </div>
+
 
               <div class="control col-12">
                 <label class="label form-label" for="filterSelect">🎨 Choose Filter Effect</label>
@@ -314,10 +453,13 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <h5>🎨 Image Filters & Effects</h5>
-          <p class="text-muted">Professional photo editing tools completely free. No registration, no watermarks, instant results.</p>
+          <h5>🎨 Image Filters & Color Effects</h5>
+          <p class="text-muted">Professional photo editing tools with RGB color adjustment, AI background removal, and reflection effects. No registration, no watermarks, instant results.</p>
           <ul class="list-unstyled">
             <li><a href="#filters" class="text-decoration-none feature-link" data-feature="filters">🎨 All Filters</a></li>
+            <li><a href="#color" class="text-decoration-none feature-link" data-feature="color">🎨 RGB Color Adjustment</a></li>
+            <li><a href="#background" class="text-decoration-none feature-link" data-feature="background">🖼️ Background Removal</a></li>
+            <li><a href="#reflection" class="text-decoration-none feature-link" data-feature="reflection">🪞 Reflection Effects</a></li>
             <li><a href="#shapes" class="text-decoration-none feature-link" data-feature="shapes">✂️ Shape Masks</a></li>
             <li><a href="#transform" class="text-decoration-none feature-link" data-feature="transform">🔄 Transform Tools</a></li>
             <li><a href="#formats" class="text-decoration-none feature-link" data-feature="formats">💾 Format Options</a></li>
@@ -328,6 +470,9 @@
           <ul class="list-unstyled">
             <li><a href="#vintage" class="text-decoration-none feature-link" data-feature="vintage">📷 Vintage Filter</a></li>
             <li><a href="#blackwhite" class="text-decoration-none feature-link" data-feature="blackwhite">⚫ Black & White</a></li>
+            <li><a href="#color" class="text-decoration-none feature-link" data-feature="color">🎨 RGB Color Adjustment</a></li>
+            <li><a href="#background" class="text-decoration-none feature-link" data-feature="background">🖼️ Background Removal</a></li>
+            <li><a href="#reflection" class="text-decoration-none feature-link" data-feature="reflection">🪞 Reflection Effects</a></li>
             <li><a href="#blur" class="text-decoration-none feature-link" data-feature="blur">💫 Blur Effect</a></li>
             <li><a href="#brightness" class="text-decoration-none feature-link" data-feature="brightness">☀️ Brightness Control</a></li>
             <li><a href="#contrast" class="text-decoration-none feature-link" data-feature="contrast">◐ Contrast Adjustment</a></li>
@@ -335,7 +480,7 @@
         </div>
         <div class="col-md-4">
           <h5>🌟 About This Tool</h5>
-          <p class="text-muted">Free online image editor supporting PNG, JPG, JPEG formats with multiple output options. Perfect for social media, web content, and professional photo editing.</p>
+          <p class="text-muted">Free online image editor with RGB color adjustment, AI background removal, reflection effects, and professional filters. Supporting PNG, JPG, JPEG formats with multiple output options. Perfect for social media, web content, and professional photo editing.</p>
           <div class="mt-2">
             <small class="text-muted">🚀 Fast Processing | 💎 No Watermarks | 📱 Mobile Friendly | 💾 Multiple Formats</small>
           </div>
