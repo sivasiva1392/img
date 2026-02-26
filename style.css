@@ -477,10 +477,10 @@ body {
 @media (max-width: 991.98px) {
   .navbar-collapse {
     background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-top: 0.5rem;
+    padding: 0.64rem;
+    border-radius: 5px;
+    box-shadow: 0 2.4px 8px rgba(0, 0, 0, 0.064);
+    margin-top: 0.32rem;
   }
   
   .navbar-nav {
@@ -488,9 +488,39 @@ body {
   }
   
   .navbar-nav .nav-link {
-    margin: 0.25rem 0;
+    margin: 0.16rem 0;
     display: inline-block;
   }
+}
+
+/* Reduce overall navbar size by 40% total */
+.navbar {
+  padding-top: 0.64rem !important;
+  padding-bottom: 0.64rem !important;
+}
+
+.navbar-brand {
+  font-size: 0.96rem !important;
+}
+
+.navbar-brand img {
+  height: 19.2px !important;
+}
+
+.navbar-nav .nav-link {
+  font-size: 0.68rem !important;
+  padding: 0.32rem 0.64rem !important;
+  margin: 0 0.24rem !important;
+}
+
+.navbar-toggler {
+  padding: 0.2rem 0.4rem !important;
+  font-size: 0.7rem !important;
+}
+
+.navbar-toggler-icon {
+  width: 0.96em !important;
+  height: 0.96em !important;
 }
 
 /* SEO and Feature Cards */
