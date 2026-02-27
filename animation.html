@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Image Animation Creator - PixifyNow | Create Animated GIFs from Images</title>
+  <meta name="description" content="Create animated GIFs from your images with various animation effects. Upload images, add animations, and download as GIF. Free online animation tool." />
+  <meta name="keywords" content="image animation, GIF creator, animated images, online animation tool, GIF maker, image effects, animation effects" />
+  <meta name="author" content="PixifyNow Team" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="distribution" content="global" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Image Animation Creator - PixifyNow" />
+  <meta property="og:description" content="Create animated GIFs from your images with various animation effects. Free, no registration required." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pixifynow.com/animation.html" />
+  <meta property="og:site_name" content="PixifyNow" />
+  <meta property="og:image" content="https://pixifynow.com/logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Image Animation Creator - PixifyNow" />
+  <meta name="twitter:description" content="Create animated GIFs from your images with professional animation effects. Completely free." />
+  <meta name="twitter:image" content="https://pixifynow.com/logo.png" />
+  <meta name="twitter:site" content="@pixifynow" />
+  <meta name="twitter:creator" content="@pixifynow" />
+  
+  <!-- Additional SEO Meta Tags -->
+  <meta name="theme-color" content="#007bff" />
+  <meta name="msapplication-TileColor" content="#007bff" />
+  <meta name="application-name" content="PixifyNow" />
+  <meta name="apple-mobile-web-app-title" content="PixifyNow" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://pixifynow.com/animation.html" />
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- gif.js library for GIF creation -->
+  <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js"></script>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="index.html">
+        <img src="logo.png" alt="Pixify Now" style="width: auto; height: 30px;"> PixifyNow
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <div class="navbar-nav">
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="index.html">
+            🎨 <strong>Editor</strong>
+          </a>
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="drawing.html">
+            ✏️ <strong>Drawing</strong>
+          </a>
+          <a class="nav-link active bg-primary text-white rounded px-3 py-2 mx-1" href="animation.html">
+            🎬 <strong>Animation</strong>
+          </a>
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="meme.html">
+            😂 <strong>Meme</strong>
+          </a>
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="about.html">
+            ℹ️ <strong>About</strong>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <style>
+    .nav-link.hover-bg-primary:hover {
+      background-color: #007bff !important;
+      color: white !important;
+      transition: all 0.3s ease;
+    }
+    .navbar-brand {
+      transition: transform 0.2s ease;
+    }
+    .navbar-brand:hover {
+      transform: scale(1.05);
+    }
+    .nav-link {
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .nav-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,123,255,0.2);
+    }
+    
+    .animation-canvas {
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .preview-frame {
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      background: #f8f9fa;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .frame-thumbnail {
+      border: 2px solid #dee2e6;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin: 2px;
+    }
+    
+    .frame-thumbnail:hover {
+      transform: scale(1.05);
+      border-color: #007bff;
+    }
+    
+    .frame-thumbnail.active {
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0,123,255,0.2);
+    }
+    
+    .animation-controls {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .loading-spinner {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .loading-spinner.active {
+      display: block;
+    }
+    
+    .progress-bar-container {
+      display: none;
+      margin-top: 10px;
+    }
+    
+    .progress-bar-container.active {
+      display: block;
+    }
+  </style>
+
+  <!-- Main Content -->
+  <main class="container py-4">
+    <!-- Header -->
+    <div class="text-center mb-4">
+      <h1 class="display-5 fw-bold mb-2">🎬 Image Animation Creator</h1>
+      <p class="lead text-muted">Upload images, add animation effects, and create animated GIFs</p>
+    </div>
+
+    <!-- Animation Tools Panel -->
+    <div class="row mb-3">
+      <div class="col-lg-12">
+        <div class="card shadow-sm">
+          <div class="card-body p-3">
+            <div class="row g-3">
+              <!-- Image Upload -->
+              <div class="col-md-3">
+                <h6 class="mb-2">📁 Upload Images</h6>
+                <input type="file" id="imageInput" class="form-control" accept="image/*" multiple />
+                <small class="text-muted">Select one or more images</small>
+              </div>
+
+              <!-- Animation Type -->
+              <div class="col-md-3">
+                <h6 class="mb-2">🎭 Animation Effect</h6>
+                <select id="animationType" class="form-select">
+                  <option value="fade">🌅 Fade In/Out</option>
+                  <option value="slide">➡️ Slide</option>
+                  <option value="zoom">🔍 Zoom In/Out</option>
+                  <option value="rotate">🔄 Rotate</option>
+                  <option value="bounce">⚡ Bounce</option>
+                  <option value="shake">🫨 Shake</option>
+                  <option value="flip">🔃 Flip</option>
+                  <option value="pulse">💗 Pulse</option>
+                </select>
+              </div>
+
+              <!-- Animation Speed -->
+              <div class="col-md-2">
+                <h6 class="mb-2">⚡ Speed (ms)</h6>
+                <input type="number" id="animationSpeed" class="form-control" value="500" min="100" max="2000" step="100" />
+                <small class="text-muted">Frame duration</small>
+              </div>
+
+              <!-- Loop Count -->
+              <div class="col-md-2">
+                <h6 class="mb-2">🔄 Loop Count</h6>
+                <select id="loopCount" class="form-select">
+                  <option value="0">∞ Infinite</option>
+                  <option value="1">1 Time</option>
+                  <option value="2">2 Times</option>
+                  <option value="3">3 Times</option>
+                  <option value="5">5 Times</option>
+                  <option value="10">10 Times</option>
+                </select>
+              </div>
+
+              <!-- Actions -->
+              <div class="col-md-2">
+                <h6 class="mb-2">⚡ Actions</h6>
+                <div class="d-flex gap-2 flex-wrap">
+                  <button class="btn btn-primary btn-sm" id="previewBtn">👁️ Preview</button>
+                  <button class="btn btn-success btn-sm" id="createGifBtn">🎬 Create GIF</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Working Area -->
+    <div class="row">
+      <!-- Frames Panel -->
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">🎬 Animation Frames</h5>
+          </div>
+          <div class="card-body">
+            <div class="preview-frame" id="previewFrame">
+              <canvas id="animationCanvas" class="animation-canvas" width="800" height="600"></canvas>
+              <div id="uploadHint" class="text-center text-muted">
+                <h4>📁 Upload Images to Start</h4>
+                <p>Select one or more images to create your animation</p>
+              </div>
+            </div>
+            
+            <!-- Frame Timeline -->
+            <div class="mt-3">
+              <h6>🎞️ Frame Timeline</h6>
+              <div id="framesContainer" class="d-flex flex-wrap overflow-auto" style="max-height: 120px;">
+                <!-- Frame thumbnails will be added here -->
+              </div>
+            </div>
+            
+            <!-- Animation Controls -->
+            <div class="animation-controls mt-3">
+              <div class="row align-items-center">
+                <div class="col-md-3">
+                  <button class="btn btn-outline-primary btn-sm" id="playBtn">▶️ Play</button>
+                  <button class="btn btn-outline-secondary btn-sm" id="pauseBtn">⏸️ Pause</button>
+                  <button class="btn btn-outline-danger btn-sm" id="stopBtn">⏹️ Stop</button>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Current Frame: <span id="currentFrameLabel">0</span> / <span id="totalFramesLabel">0</span></label>
+                  <input type="range" id="frameSlider" class="form-range" min="0" max="0" value="0" />
+                </div>
+                <div class="col-md-3 text-end">
+                  <button class="btn btn-outline-warning btn-sm" id="addFrameBtn">➕ Add Frame</button>
+                  <button class="btn btn-outline-danger btn-sm" id="removeFrameBtn">➖ Remove Frame</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Panel -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">⚙️ Animation Settings</h5>
+          </div>
+          <div class="card-body">
+            <!-- Animation Settings -->
+            <div class="mb-3">
+              <h6>🎨 Animation Properties</h6>
+              <div class="mb-2">
+                <label class="form-label">Easing</label>
+                <select id="easingType" class="form-select">
+                  <option value="linear">Linear</option>
+                  <option value="ease-in">Ease In</option>
+                  <option value="ease-out">Ease Out</option>
+                  <option value="ease-in-out">Ease In-Out</option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <label class="form-label">Quality</label>
+                <select id="gifQuality" class="form-select">
+                  <option value="10">High Quality</option>
+                  <option value="20">Medium Quality</option>
+                  <option value="30">Low Quality (Smaller File)</option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <label class="form-label">Canvas Size</label>
+                <select id="canvasSize" class="form-select">
+                  <option value="original">Original Size</option>
+                  <option value="800x600">800x600</option>
+                  <option value="640x480">640x480</option>
+                  <option value="500x500">500x500 (Square)</option>
+                  <option value="400x400">400x400 (Square)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Export Options -->
+            <div class="mb-3">
+              <h6>💾 Export Options</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="includeTransparency" checked>
+                <label class="form-check-label" for="includeTransparency">
+                  Include Transparency
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="optimizeSize" checked>
+                <label class="form-check-label" for="optimizeSize">
+                  Optimize File Size
+                </label>
+              </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="loading-spinner" id="loadingSpinner">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <p class="mt-2">Creating GIF...</p>
+            </div>
+            
+            <div class="progress-bar-container" id="progressContainer">
+              <div class="progress">
+                <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%"></div>
+              </div>
+              <small class="text-muted">Progress: <span id="progressText">0%</span></small>
+            </div>
+
+            <!-- Download Button -->
+            <div class="mt-3" id="downloadSection" style="display: none;">
+              <button class="btn btn-success btn-lg w-100" id="downloadGifBtn">
+                💾 Download GIF
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="row mt-4">
+      <div class="col-lg-12">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <h5 class="card-title">📖 How to Create Animations</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <h6>🚀 Getting Started:</h6>
+                <ul class="list-unstyled">
+                  <li>📁 <strong>Upload Images:</strong> Select one or more images from your device</li>
+                  <li>🎭 <strong>Choose Animation:</strong> Select an animation effect from the dropdown</li>
+                  <li>⚡ <strong>Adjust Settings:</strong> Set speed, loop count, and other properties</li>
+                  <li>👁️ <strong>Preview:</strong> Click preview to see your animation before creating GIF</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h6>💡 Pro Tips:</h6>
+                <ul class="list-unstyled">
+                  <li>🎨 <strong>Multiple Images:</strong> Upload multiple images for frame-by-frame animation</li>
+                  <li>⚡ <strong>Speed Control:</strong> Lower values create faster animations</li>
+                  <li>🔄 <strong>Loop Options:</strong> Choose infinite loops or specific repeat counts</li>
+                  <li>💾 <strong>Quality vs Size:</strong> Higher quality creates larger files</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app__footer mt-5 py-4 border-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>🎬 Animation Tools</h5>
+          <p class="text-muted">Create animated GIFs from your images with professional animation effects. No registration required.</p>
+          <ul class="list-unstyled">
+            <li><a href="index.html" class="text-decoration-none">🎨 Image Editor</a></li>
+            <li><a href="drawing.html" class="text-decoration-none">✏️ Drawing Canvas</a></li>
+            <li><a href="animation.html" class="text-decoration-none">🎬 Animation Creator</a></li>
+            <li><a href="meme.html" class="text-decoration-none">😂 Meme Generator</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>📚 Animation Features</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-decoration-none">🎭 Multiple Animation Effects</a></li>
+            <li><a href="#" class="text-decoration-none">📁 Batch Image Upload</a></li>
+            <li><a href="#" class="text-decoration-none">⚡ Adjustable Speed</a></li>
+            <li><a href="#" class="text-decoration-none">🔄 Loop Control</a></li>
+            <li><a href="#" class="text-decoration-none">💾 GIF Export</a></li>
+            <li><a href="#" class="text-decoration-none">👁️ Real-time Preview</a></li>
+            <li><a href="#" class="text-decoration-none">🎨 Frame Timeline</a></li>
+            <li><a href="#" class="text-decoration-none">⚙️ Quality Settings</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>🌟 About This Tool</h5>
+          <p class="text-muted">Free online animation creator with professional effects. Create animated GIFs from your images without downloading software. Perfect for social media, web content, and creative projects.</p>
+          <div class="mt-2">
+            <small class="text-muted">🚀 Smooth Animations | 💎 No Watermarks | 📱 Mobile Friendly | 💾 GIF Export</small>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4 pt-3 border-top">
+        <p class="text-muted mb-0">© 2026 PixifyNow - Free Online Photo Editor. All rights reserved.</p>
+        <p class="text-muted small">Create animated GIFs online • Professional animation effects • No download required • <a href="about.html" class="text-decoration-none">ℹ️ About</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Animation App Script -->
+  <script>
+    class AnimationApp {
+      constructor() {
+        this.canvas = document.getElementById('animationCanvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.frames = [];
+        this.currentFrame = 0;
+        this.isPlaying = false;
+        this.animationInterval = null;
+        this.gifBlob = null;
+        
+        this.setupEventListeners();
+        this.hideCanvas();
+      }
+      
+      hideCanvas() {
+        this.canvas.style.display = 'none';
+        document.getElementById('uploadHint').style.display = 'block';
+      }
+      
+      showCanvas() {
+        this.canvas.style.display = 'block';
+        document.getElementById('uploadHint').style.display = 'none';
+      }
+      
+      setupEventListeners() {
+        // Image upload
+        document.getElementById('imageInput').addEventListener('change', (e) => this.handleImageUpload(e));
+        
+        // Animation controls
+        document.getElementById('previewBtn').addEventListener('click', () => this.previewAnimation());
+        document.getElementById('createGifBtn').addEventListener('click', () => this.createGIF());
+        document.getElementById('playBtn').addEventListener('click', () => this.play());
+        document.getElementById('pauseBtn').addEventListener('click', () => this.pause());
+        document.getElementById('stopBtn').addEventListener('click', () => this.stop());
+        
+        // Animation type change
+        document.getElementById('animationType').addEventListener('change', () => this.updateFrameAnimations());
+        document.getElementById('animationSpeed').addEventListener('change', () => this.updateFrameAnimations());
+        
+        // Canvas size change
+        document.getElementById('canvasSize').addEventListener('change', () => this.resizeCanvas());
+        
+        // Frame controls
+        document.getElementById('frameSlider').addEventListener('input', (e) => this.goToFrame(parseInt(e.target.value)));
+        document.getElementById('addFrameBtn').addEventListener('click', () => this.addFrame());
+        document.getElementById('removeFrameBtn').addEventListener('click', () => this.removeFrame());
+        
+        // Download
+        document.getElementById('downloadGifBtn').addEventListener('click', () => this.downloadGIF());
+      }
+      
+      handleImageUpload(event) {
+        const files = Array.from(event.target.files);
+        
+        files.forEach(file => {
+          if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const img = new Image();
+              img.onload = () => {
+                this.addImageFrame(img);
+              };
+              img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+      
+      addImageFrame(img) {
+        // Resize canvas to fit image if needed
+        const canvasSize = document.getElementById('canvasSize').value;
+        if (canvasSize !== 'original') {
+          const [width, height] = canvasSize.split('x').map(Number);
+          this.canvas.width = width;
+          this.canvas.height = height;
+        } else {
+          this.canvas.width = img.width;
+          this.canvas.height = img.height;
+        }
+        
+        // Create frame
+        const frame = {
+          image: img,
+          originalImage: img,
+          animationType: document.getElementById('animationType').value,
+          speed: parseInt(document.getElementById('animationSpeed').value),
+          timestamp: Date.now()
+        };
+        
+        this.frames.push(frame);
+        this.showCanvas();
+        this.updateFramesList();
+        this.updateFrameControls();
+        this.displayFrame(this.frames.length - 1);
+      }
+      
+      updateFrameAnimations() {
+        const animationType = document.getElementById('animationType').value;
+        const animationSpeed = parseInt(document.getElementById('animationSpeed').value);
+        
+        this.frames.forEach(frame => {
+          frame.animationType = animationType;
+          frame.speed = animationSpeed;
+        });
+      }
+      
+      resizeCanvas() {
+        if (this.frames.length === 0) return;
+        
+        const canvasSize = document.getElementById('canvasSize').value;
+        if (canvasSize !== 'original') {
+          const [width, height] = canvasSize.split('x').map(Number);
+          this.canvas.width = width;
+          this.canvas.height = height;
+        } else if (this.frames.length > 0) {
+          const firstImg = this.frames[0].originalImage;
+          this.canvas.width = firstImg.width;
+          this.canvas.height = firstImg.height;
+        }
+        
+        this.displayFrame(this.currentFrame);
+      }
+      
+      addFrame() {
+        if (this.frames.length > 0) {
+          const lastFrame = this.frames[this.frames.length - 1];
+          const newFrame = {
+            image: lastFrame.originalImage,
+            originalImage: lastFrame.originalImage,
+            animationType: document.getElementById('animationType').value,
+            speed: parseInt(document.getElementById('animationSpeed').value),
+            timestamp: Date.now()
+          };
+          this.frames.push(newFrame);
+          this.updateFramesList();
+          this.updateFrameControls();
+          this.goToFrame(this.frames.length - 1);
+        }
+      }
+      
+      removeFrame() {
+        if (this.frames.length > 1 && this.currentFrame < this.frames.length) {
+          this.frames.splice(this.currentFrame, 1);
+          if (this.currentFrame >= this.frames.length) {
+            this.currentFrame = this.frames.length - 1;
+          }
+          this.updateFramesList();
+          this.updateFrameControls();
+          this.displayFrame(this.currentFrame);
+        }
+      }
+      
+      updateFramesList() {
+        const container = document.getElementById('framesContainer');
+        container.innerHTML = '';
+        
+        this.frames.forEach((frame, index) => {
+          const thumbnail = document.createElement('canvas');
+          thumbnail.className = 'frame-thumbnail';
+          thumbnail.width = 80;
+          thumbnail.height = 60;
+          thumbnail.style.cursor = 'pointer';
+          
+          if (index === this.currentFrame) {
+            thumbnail.classList.add('active');
+          }
+          
+          const thumbCtx = thumbnail.getContext('2d');
+          thumbCtx.drawImage(frame.image, 0, 0, 80, 60);
+          
+          thumbnail.addEventListener('click', () => this.goToFrame(index));
+          container.appendChild(thumbnail);
+        });
+      }
+      
+      updateFrameControls() {
+        document.getElementById('currentFrameLabel').textContent = this.currentFrame + 1;
+        document.getElementById('totalFramesLabel').textContent = this.frames.length;
+        
+        const slider = document.getElementById('frameSlider');
+        slider.max = Math.max(0, this.frames.length - 1);
+        slider.value = this.currentFrame;
+      }
+      
+      goToFrame(index) {
+        if (index >= 0 && index < this.frames.length) {
+          this.currentFrame = index;
+          this.displayFrame(index);
+          this.updateFramesList();
+          this.updateFrameControls();
+        }
+      }
+      
+      displayFrame(index) {
+        if (index >= 0 && index < this.frames.length) {
+          const frame = this.frames[index];
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          this.ctx.drawImage(frame.image, 0, 0, this.canvas.width, this.canvas.height);
+        }
+      }
+      
+      applyAnimation(frame, progress) {
+        const ctx = this.ctx;
+        const img = frame.originalImage;
+        const type = frame.animationType;
+        const easing = this.getEasing(document.getElementById('easingType').value);
+        const easedProgress = easing(progress);
+        
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        ctx.save();
+        
+        const centerX = this.canvas.width / 2;
+        const centerY = this.canvas.height / 2;
+        
+        switch (type) {
+          case 'fade':
+            ctx.globalAlpha = easedProgress;
+            break;
+            
+          case 'slide':
+            const slideX = (easedProgress - 0.5) * this.canvas.width;
+            ctx.translate(slideX, 0);
+            break;
+            
+          case 'zoom':
+            const scale = 0.5 + easedProgress * 1.5;
+            ctx.translate(centerX, centerY);
+            ctx.scale(scale, scale);
+            ctx.translate(-centerX, -centerY);
+            break;
+            
+          case 'rotate':
+            ctx.translate(centerX, centerY);
+            ctx.rotate(easedProgress * Math.PI * 2);
+            ctx.translate(-centerX, -centerY);
+            break;
+            
+          case 'bounce':
+            const bounceY = Math.abs(Math.sin(easedProgress * Math.PI * 2)) * -50;
+            ctx.translate(0, bounceY);
+            break;
+            
+          case 'shake':
+            const shakeIntensity = 10 * (1 - easedProgress);
+            const shakeX = (Math.random() - 0.5) * shakeIntensity;
+            const shakeY = (Math.random() - 0.5) * shakeIntensity;
+            ctx.translate(shakeX, shakeY);
+            break;
+            
+          case 'flip':
+            if (easedProgress > 0.5) {
+              ctx.translate(this.canvas.width, 0);
+              ctx.scale(-1, 1);
+            }
+            break;
+            
+          case 'pulse':
+            const pulseScale = 1 + Math.sin(easedProgress * Math.PI * 2) * 0.1;
+            ctx.translate(centerX, centerY);
+            ctx.scale(pulseScale, pulseScale);
+            ctx.translate(-centerX, -centerY);
+            break;
+        }
+        
+        ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+        ctx.restore();
+      }
+      
+      getEasing(type) {
+        switch (type) {
+          case 'ease-in':
+            return t => t * t;
+          case 'ease-out':
+            return t => t * (2 - t);
+          case 'ease-in-out':
+            return t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+          case 'linear':
+          default:
+            return t => t;
+        }
+      }
+      
+      previewAnimation() {
+        if (this.frames.length === 0) return;
+        
+        this.isPlaying = true;
+        let frameIndex = 0;
+        let startTime = Date.now();
+        
+        const animate = () => {
+          if (!this.isPlaying) return;
+          
+          const frame = this.frames[frameIndex];
+          const elapsed = Date.now() - startTime;
+          const progress = (elapsed % frame.speed) / frame.speed;
+          
+          this.applyAnimation(frame, progress);
+          
+          if (elapsed >= frame.speed) {
+            frameIndex = (frameIndex + 1) % this.frames.length;
+            startTime = Date.now();
+            this.currentFrame = frameIndex;
+            this.updateFramesList();
+            this.updateFrameControls();
+          }
+          
+          requestAnimationFrame(animate);
+        };
+        
+        animate();
+      }
+      
+      play() {
+        if (this.frames.length === 0) return;
+        
+        this.isPlaying = true;
+        const speed = parseInt(document.getElementById('animationSpeed').value);
+        
+        this.animationInterval = setInterval(() => {
+          this.currentFrame = (this.currentFrame + 1) % this.frames.length;
+          this.displayFrame(this.currentFrame);
+          this.updateFramesList();
+          this.updateFrameControls();
+        }, speed);
+      }
+      
+      pause() {
+        this.isPlaying = false;
+        if (this.animationInterval) {
+          clearInterval(this.animationInterval);
+          this.animationInterval = null;
+        }
+      }
+      
+      stop() {
+        this.pause();
+        this.currentFrame = 0;
+        this.displayFrame(0);
+        this.updateFramesList();
+        this.updateFrameControls();
+      }
+      
+      async createGIF() {
+        if (this.frames.length === 0) {
+          alert('Please upload at least one image first!');
+          return;
+        }
+        
+        // Show loading
+        document.getElementById('loadingSpinner').classList.add('active');
+        document.getElementById('progressContainer').classList.add('active');
+        document.getElementById('downloadSection').style.display = 'none';
+        
+        const quality = parseInt(document.getElementById('gifQuality').value);
+        const speed = parseInt(document.getElementById('animationSpeed').value);
+        const loopCount = parseInt(document.getElementById('loopCount').value);
+        const animationType = document.getElementById('animationType').value;
+        
+        // Reset progress
+        document.getElementById('progressBar').style.width = '0%';
+        document.getElementById('progressText').textContent = '0%';
+        
+        try {
+          // Simple GIF creation with minimal frames
+          const gif = new GIF({
+            workers: 1,
+            quality: 30, // Fixed quality for speed
+            width: Math.min(this.canvas.width, 400), // Smaller size
+            height: Math.min(this.canvas.height, 300), // Smaller size
+            repeat: loopCount
+          });
+          
+          // Generate only 4 frames for speed
+          const framesPerAnimation = 4;
+          let totalFrames = 0;
+          
+          for (let frameIndex = 0; frameIndex < this.frames.length; frameIndex++) {
+            const frame = this.frames[frameIndex];
+            
+            for (let step = 0; step < framesPerAnimation; step++) {
+              const progress = step / framesPerAnimation;
+              this.applyAnimation(frame, progress);
+              
+              gif.addFrame(this.ctx, {delay: 200, copy: true});
+              totalFrames++;
+            }
+            
+            // Update progress immediately
+            const progress = ((frameIndex + 1) / this.frames.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '%';
+          }
+          
+          // Set up handlers
+          gif.on('finished', (blob) => {
+            this.gifBlob = blob;
+            document.getElementById('loadingSpinner').classList.remove('active');
+            document.getElementById('progressContainer').classList.remove('active');
+            document.getElementById('downloadSection').style.display = 'block';
+            console.log('GIF created successfully!');
+          });
+          
+          gif.on('progress', (progress) => {
+            document.getElementById('progressBar').style.width = (progress * 100) + '%';
+            document.getElementById('progressText').textContent = Math.round(progress * 100) + '%';
+          });
+          
+          gif.on('error', (error) => {
+            console.error('GIF error:', error);
+            this.createSimpleGIF();
+          });
+          
+          // Start rendering
+          setTimeout(() => gif.render(), 100);
+          
+        } catch (error) {
+          console.error('GIF creation error:', error);
+          this.createSimpleGIF();
+        }
+      }
+      
+      createSimpleGIF() {
+        // Fallback: Create single animated frame
+        try {
+          const frame = this.frames[0];
+          this.applyAnimation(frame, 0.5); // Mid-animation frame
+          
+          // Convert to blob and download
+          this.canvas.toBlob((blob) => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `animation_${document.getElementById('animationType').value}_${Date.now()}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Hide loading
+            document.getElementById('loadingSpinner').classList.remove('active');
+            document.getElementById('progressContainer').classList.remove('active');
+            
+            alert('Downloaded animation frame as PNG. For full GIF, try with a smaller image.');
+          }, 'image/png', 0.8);
+          
+        } catch (error) {
+          alert('Failed to create animation. Please try with a smaller image.');
+          document.getElementById('loadingSpinner').classList.remove('active');
+          document.getElementById('progressContainer').classList.remove('active');
+        }
+      }
+      
+      createAlternativeGIF() {
+        // Alternative: Create animated WebP or sequence
+        try {
+          const speed = parseInt(document.getElementById('animationSpeed').value);
+          const framesPerAnimation = 6; // Reduced frames for speed
+          const frames = [];
+          
+          for (let frameIndex = 0; frameIndex < this.frames.length; frameIndex++) {
+            const frame = this.frames[frameIndex];
+            
+            for (let step = 0; step < framesPerAnimation; step++) {
+              const progress = step / framesPerAnimation;
+              this.applyAnimation(frame, progress);
+              
+              // Convert canvas to data URL
+              const dataUrl = this.canvas.toDataURL('image/png', 0.8); // Reduced quality for speed
+              frames.push(dataUrl);
+            }
+            
+            // Update progress
+            const progress = ((frameIndex + 1) / this.frames.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '%';
+            
+            // Allow UI to update
+            setTimeout(() => {}, 10);
+          }
+          
+          // Create animated sequence download
+          this.downloadAnimatedSequence(frames);
+          
+        } catch (error) {
+          console.error('Alternative GIF creation failed:', error);
+          alert('Animation creation failed. Please try with a smaller image.');
+          
+          // Hide loading
+          document.getElementById('loadingSpinner').classList.remove('active');
+          document.getElementById('progressContainer').classList.remove('active');
+        }
+      }
+      
+      downloadAnimatedSequence(frames) {
+        // Download first frame as preview
+        if (frames.length > 0) {
+          const img = new Image();
+          img.onload = () => {
+            // Create a canvas for the final image
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = this.canvas.width;
+            tempCanvas.height = this.canvas.height;
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            // Draw the image with animation info
+            tempCtx.drawImage(img, 0, 0);
+            tempCtx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            tempCtx.fillRect(0, tempCanvas.height - 40, tempCanvas.width, 40);
+            tempCtx.fillStyle = 'white';
+            tempCtx.font = '16px Arial';
+            tempCtx.fillText(`Animation: ${document.getElementById('animationType').value} | Frames: ${frames.length}`, 10, tempCanvas.height - 15);
+            
+            // Download the animated frame
+            tempCanvas.toBlob((blob) => {
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `animation_${document.getElementById('animationType').value}_${Date.now()}.png`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+            }, 'image/png');
+          };
+          img.src = frames[0];
+        }
+        
+        // Hide loading
+        document.getElementById('loadingSpinner').classList.remove('active');
+        document.getElementById('progressContainer').classList.remove('active');
+        
+        alert(`Created ${frames.length} animation frames! Downloaded first frame as preview.`);
+      }
+      
+      downloadGIF() {
+        if (this.gifBlob) {
+          const url = URL.createObjectURL(this.gifBlob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'animation_' + Date.now() + '.gif';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+      }
+    }
+    
+    // Initialize app when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new AnimationApp();
+    });
+  </script>
+</body>
+
+</html>
