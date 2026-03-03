@@ -1475,40 +1475,9 @@
       }
 
       setupEventListeners() {
-        // Upload functionality - Main upload area
-        const uploadArea = document.getElementById('uploadArea');
-        const imageUpload = document.getElementById('imageUpload');
-
-        // Upload functionality - Sidebar upload area
+        // Upload functionality - Sidebar upload area only
         const uploadAreaSidebar = document.getElementById('uploadAreaSidebar');
         const imageUploadSidebar = document.getElementById('imageUploadSidebar');
-
-        // Setup main upload area
-        if (uploadArea && imageUpload) {
-          uploadArea.addEventListener('click', () => imageUpload.click());
-          uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-          });
-          uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
-          });
-          uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            const file = e.dataTransfer.files[0];
-            if (file && file.type.startsWith('image/')) {
-              this.loadImage(file);
-            }
-          });
-
-          imageUpload.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-              this.loadImage(file);
-            }
-          });
-        }
 
         // Setup sidebar upload area
         if (uploadAreaSidebar && imageUploadSidebar) {
