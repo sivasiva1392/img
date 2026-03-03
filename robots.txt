@@ -17,9 +17,11 @@ Allow: *.svg
 
 # Allow access to all pages
 Allow: /index.html
+Allow: /editor.html
+Allow: /animation.html
+Allow: /resize.html
 Allow: /drawing.html
 Allow: /meme.html
-Allow: /about.html
 Allow: /style.css
 
 # Block unnecessary files and directories
