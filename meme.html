@@ -106,6 +106,14 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Impact&family=Arial&family=Comic+Neue:wght@700&family=Bebas+Neue&family=Oswald:wght@700&family=Roboto:wght@900&display=swap" rel="stylesheet">
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LYLE643DLW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LYLE643DLW');
+  </script>
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
 </head>
@@ -122,17 +130,18 @@
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <div class="navbar-nav">
-          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="about.html">
-            ℹ️ <strong>About</strong>
-          </a>
-          <a class="nav-link active bg-primary text-white rounded px-3 py-2 mx-1" href="meme.html">
-            😂 <strong>Meme</strong>
-          </a>
           <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="index.html">
-            � <strong>Editor</strong>
+            ℹ️ <strong>Home</strong>
           </a>
+          <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="editor.html">
+            🎨 <strong>Editor</strong>
+          </a>
+          <a class="nav-link active bg-primary text-white rounded px-3 py-2 mx-1 hover-bg-primary" href="meme.html">
+            � <strong>Meme</strong>
+          </a>
+
           <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="resize.html">
-            � <strong>Resize</strong>
+            📏 <strong>Resize</strong>
           </a>
           <a class="nav-link border border-primary text-primary rounded px-3 py-2 mx-1 hover-bg-primary" href="drawing.html">
             ✏️ <strong>Drawing</strong>
@@ -289,6 +298,9 @@
     .meme-text.custom {
       top: 50%;
       transform: translateY(-50%);
+    }
+        main h1 {
+    font-size: 1.2rem !important;
     }
   </style>
 
