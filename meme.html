@@ -109,7 +109,7 @@
 
   <!-- Google Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Impact&family=Arial&family=Comic+Neue:wght@700&family=Bebas+Neue&family=Oswald:wght@700&family=Roboto:wght@900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Impact&family=Arial&family=Comic+Neue:wght@700&family=Bebas+Neue&family=Oswald:wght@700&family=Roboto:wght@900&family=Anton&family=Black+Ops+One&family=Bungee&family=Changa&family=Coiny&family=Damion&family=Fredoka+One&family=Griffy&family=Iceland&family=Jim+Nightshade&family=Kalam:wght@700&family=Lilita+One&family=Lobster&family=Ma+Shan+Zheng&family=Monoton&family=Montserrat:wght@900&family=Noto+Sans:wght@900&family=Patua+One&family=Permanent+Marker&family=Playfair+Display:wght@900&family=Potta+One&family=Press+Start+2P&family=Righteous&family=Russo+One&family=Satisfy&family=Sigmar+One&family=Slabo+27px&family=Special+Elite&family=Staatliches&family=Tangerine&family=Teko:wght@700&family=Ubuntu+Mono:wght@700&family=VT323&family=ZCOOL+KuKu&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&display=swap"
     rel="stylesheet">
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LYLE643DLW"></script>
@@ -302,13 +302,14 @@
     }
 
     .meme-text {
+      font-size: 50px;
       position: absolute;
       text-align: center;
       width: 100%;
       left: 0;
       font-weight: bold;
       text-transform: uppercase;
-      -webkit-text-stroke: 2px black;
+      -webkit-text-stroke: 1px #ffffff;
       text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
       user-select: none;
       cursor: move;
@@ -343,9 +344,9 @@
 
 
     <!-- Meme Editor -->
-    <div class="row">
+    <div class="row" style="position: relative; height: 100vh;">
       <!-- Left Sidebar -->
-      <div class="col-lg-3">
+      <div class="col-lg-3" style="height: 100%; overflow-y: auto; position: absolute; left: 0; top: 0;">
         <!-- Upload & Templates -->
         <div class="card shadow-sm mb-3">
           <div class="card-body p-3">
@@ -427,11 +428,11 @@
       </div>
 
       <!-- Main Canvas Area -->
-      <div class="col-lg-6">
-        <div class="card shadow-sm">
-          <div class="card-body p-4">
+      <div class="col-lg-6" style="position: absolute; left: 25%; top: 0; width: 50%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <div class="card shadow-sm" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+          <div class="card-body p-4" style="width: 100%;">
             <h5 class="card-title mb-3">🎨 Meme Canvas</h5>
-            <div class="position-relative" id="canvasContainer">
+            <div class="position-relative" id="canvasContainer" style="width: 100%; display: flex; justify-content: center;">
               <canvas id="memeCanvas" class="meme-canvas" width="600" height="600"></canvas>
               <div class="meme-text top" id="topText" contenteditable="true">TOP TEXT</div>
               <div class="meme-text bottom" id="bottomText" contenteditable="true">BOTTOM TEXT</div>
@@ -441,7 +442,7 @@
       </div>
 
       <!-- Right Sidebar -->
-      <div class="col-lg-3">
+      <div class="col-lg-3" style="height: 100%; overflow-y: auto; position: absolute; right: 0; top: 0;">
         <!-- Text Controls -->
         <div class="card shadow-sm mb-3">
           <div class="card-body p-3">
@@ -474,12 +475,70 @@
 
             <div class="mb-3">
               <label class="form-label fw-bold">Font</label>
-              <div class="d-flex gap-2 flex-wrap">
-                <button class="text-style-btn active" data-font="Impact" style="font-family: 'Impact'">Impact</button>
-                <button class="text-style-btn" data-font="Arial" style="font-family: 'Arial'">Arial</button>
-                <button class="text-style-btn" data-font="Comic Neue" style="font-family: 'Comic Neue'">Comic</button>
-                <button class="text-style-btn" data-font="Bebas Neue" style="font-family: 'Bebas Neue'">Bebas</button>
-              </div>
+              <select class="form-select" id="fontSelect">
+                <optgroup label="Classic Meme Fonts">
+                  <option value="Impact" style="font-family: 'Impact'">Impact</option>
+                  <option value="Arial" style="font-family: 'Arial'">Arial</option>
+                  <option value="Comic Neue" style="font-family: 'Comic Neue'" selected>Comic Neue</option>
+                  <option value="Bebas Neue" style="font-family: 'Bebas Neue'">Bebas Neue</option>
+                </optgroup>
+                
+                <optgroup label="Bold & Impact Fonts">
+                  <option value="Anton" style="font-family: 'Anton'">Anton</option>
+                  <option value="Black Ops One" style="font-family: 'Black Ops One'">Black Ops One</option>
+                  <option value="Oswald" style="font-family: 'Oswald'">Oswald</option>
+                  <option value="Roboto" style="font-family: 'Roboto'">Roboto</option>
+                </optgroup>
+                
+                <optgroup label="Fun & Playful Fonts">
+                  <option value="Bungee" style="font-family: 'Bungee'">Bungee</option>
+                  <option value="Coiny" style="font-family: 'Coiny'">Coiny</option>
+                  <option value="Fredoka One" style="font-family: 'Fredoka One'">Fredoka One</option>
+                  <option value="Griffy" style="font-family: 'Griffy'">Griffy</option>
+                </optgroup>
+                
+                <optgroup label="Gaming & Tech Fonts">
+                  <option value="Press Start 2P" style="font-family: 'Press Start 2P'">Press Start 2P</option>
+                  <option value="VT323" style="font-family: 'VT323'">VT323</option>
+                  <option value="Ubuntu Mono" style="font-family: 'Ubuntu Mono'">Ubuntu Mono</option>
+                  <option value="Monoton" style="font-family: 'Monoton'">Monoton</option>
+                </optgroup>
+                
+                <optgroup label="Stylish & Modern Fonts">
+                  <option value="Montserrat" style="font-family: 'Montserrat'">Montserrat</option>
+                  <option value="Russo One" style="font-family: 'Russo One'">Russo One</option>
+                  <option value="Sigmar One" style="font-family: 'Sigmar One'">Sigmar One</option>
+                  <option value="Righteous" style="font-family: 'Righteous'">Righteous</option>
+                </optgroup>
+                
+                <optgroup label="Handwritten & Script Fonts">
+                  <option value="Permanent Marker" style="font-family: 'Permanent Marker'">Permanent Marker</option>
+                  <option value="Satisfy" style="font-family: 'Satisfy'">Satisfy</option>
+                  <option value="Kalam" style="font-family: 'Kalam'">Kalam</option>
+                  <option value="Jim Nightshade" style="font-family: 'Jim Nightshade'">Jim Nightshade</option>
+                </optgroup>
+                
+                <optgroup label="Unique & Decorative Fonts">
+                  <option value="Lobster" style="font-family: 'Lobster'">Lobster</option>
+                  <option value="Patua One" style="font-family: 'Patua One'">Patua One</option>
+                  <option value="Playfair Display" style="font-family: 'Playfair Display'">Playfair Display</option>
+                  <option value="Teko" style="font-family: 'Teko'">Teko</option>
+                </optgroup>
+                
+                <optgroup label="Special & Display Fonts">
+                  <option value="Iceland" style="font-family: 'Iceland'">Iceland</option>
+                  <option value="Staatliches" style="font-family: 'Staatliches'">Staatliches</option>
+                  <option value="Special Elite" style="font-family: 'Special Elite'">Special Elite</option>
+                  <option value="Tangerine" style="font-family: 'Tangerine'">Tangerine</option>
+                </optgroup>
+                
+                <optgroup label="Asian Style Fonts">
+                  <option value="Ma Shan Zheng" style="font-family: 'Ma Shan Zheng'">Ma Shan Zheng</option>
+                  <option value="ZCOOL KuKu" style="font-family: 'ZCOOL KuKu'">ZCOOL KuKu</option>
+                  <option value="ZCOOL QingKe HuangYou" style="font-family: 'ZCOOL QingKe HuangYou'">ZCOOL QingKe HuangYou</option>
+                  <option value="ZCOOL XiaoWei" style="font-family: 'ZCOOL XiaoWei'">ZCOOL XiaoWei</option>
+                </optgroup>
+              </select>
             </div>
 
             <div class="mb-3">
@@ -1464,7 +1523,7 @@
         this.ctx = this.canvas.getContext('2d');
         this.currentImage = null;
         this.customTexts = [];
-        this.currentFont = 'Impact';
+        this.currentFont = 'arial';
         this.textColor = '#ffffff';
         this.strokeColor = '#000000';
         this.fontSize = 48;
